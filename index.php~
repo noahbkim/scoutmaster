@@ -14,4 +14,3 @@ if (!authenticate()) {
         Hello, world!
     </body>
 </html>
-

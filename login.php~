@@ -3,10 +3,6 @@
 include_once "core/session.php";
 start();
 
-if (authenticate()) {
-    header("Location: index.php");
-}
-
 ?>
 
 <html>
