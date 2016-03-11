@@ -12,6 +12,7 @@ if (!authenticate()) {
 <html>
     <body>
         Hello, world!
+        <a href="core/logout.php">Logout</a>
     </body>
 </html>
 
