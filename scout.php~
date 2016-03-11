@@ -1,0 +1,15 @@
+<html>
+
+<head>
+<title>Scoutmaster</title>
+
+<body>
+
+<form>
+<b>Scouted by:</b> <input type="text" name="scouter"><br><br>
+<b>Team ID: </b> <input type="number" name="teamid" 
+</form>
+
+</body>
+
+</html>
