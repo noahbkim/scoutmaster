@@ -1,9 +1,9 @@
 <?php
 
-include_once "core/session.php";
-start();
+include_once "core/auth.php";
+session_start();
 
-if (authenticate()) {
+if (auth()) {
     header("Location: index.php");
 }
 
@@ -12,8 +12,7 @@ if (authenticate()) {
 <html>
     <body>
         <form action="core/login.php" method="post" name="login">
-            <input type="text" name="username"/>
-            <input type="password" name="password"/>
+            <input type="password" name="secret"/>
             <input type="submit" value="Submit">
         </form>
     </body>

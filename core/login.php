@@ -1,22 +1,27 @@
 <?php
 
 // Include and start session
-include_once "session.php";
-start();
+include_once "config.php";
+start_session();
 
 // Check if the credentials are set
-if (isset($_POST["username"], $_POST["password"])) {
+if ($_POST["secret"])) {
 
     // Grab the credentials
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
+    $secret = $_POST["secret"];
+    $secret_hash = hash("sha512", $secret);
+    
     // Try to log in
-    if (login($username, $password) == true) {
-        header("Location: /scout/");
-        error_log("aaaaaaaaaaaaaaaaa");
+    if (hash_equals($secret_hash, SECRET_HASH)) {
+        
+        // Set the session secret
+        $_SESSION["secret"] = $secret_hash;
+    
     } else {
-        header("Location: /scout/login.php?error=1");
+    
+        // Send back to the login page with error
+        header("Location: /scout/login.php?error=" . urlencode("secret"));
+    
     }
 
 }

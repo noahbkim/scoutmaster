@@ -1,7 +1,5 @@
 <?php
 
-include_once "session.php";
-start();
-logout();
+session_destroy();
 
 ?>
