@@ -29,30 +29,41 @@
             <b>Drive wheel diameter</b> (if applicable): <input type="text" name="drive_diameter"><br>
             <b>Other info:</b><input type="text" name="drive_info"><br><br>
 
-            <b>Can it score high/low goals? </b> <input type="checkbox" name="can_high_goal"> High <input type="checkbox" name="can_low_goal"> Low <br>
+            <input type="hidden" name="can_high_goal" value="0">
+            <input type="hidden" name="can_low_goal" value="0">
+            <b>Can it score high/low goals? </b> <input type="checkbox" name="can_high_goal" value="1"> High <input type="checkbox" name="can_low_goal" value="1"> Low <br>
             How well? How fast (timewise/how many times per game)? Does it have automatic aiming? How does it do these things?<br>
             <textarea name="scoring_system"></textarea><br><br>
 
-            <b>Can it pick up boulders?</b> <input type="radio" name="can_boulder" value="1"> Yes <input type="radio" name="can_boulder", value="0"> No <br>
+            <b>Can it pick up boulders?</b> <input type="radio" name="can_boulder" value="1"> Yes <input type="radio" name="can_boulder", value="0" checked="checked"> No <br>
             Where does it get the boulders from? What is the ball intake/release strategy?<br>
             <textarea name="boulder_system"></textarea><br><br>
             
             <b>What defenses can the robot pass? How well can it pass them?</b><br>
             Category A:<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_portcullis" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_portcullis" value="1">Portcullis<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_cheval" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_cheval" value="1">Cheval de Frise<br>
             Category B:<br> 
+            &nbsp;&nbsp;<input type="hidden" name="can_moat" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_moat" value="1">Moat<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_ramparts" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_ramparts" value="1">Ramparts<br>
             Category C:<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_drawbridge" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_drawbridge" value="1">Drawbridge<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_sally" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_sally" value="1">Sally Port<br>
             Category D:<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_rock" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_rock" value="1">Rock Wall<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_rough" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_rough" value="1">Rough Terrain<br>
             <br>
             
-            <b>Can climb the tower: </b> <input type="radio" name="can_climb" value="1"> Yes <input type="radio" name="can_climb" value="0"> No<br><br>
+            <b>Can go under the low bar: </b> <input type="radio" name="can_low" value="1"> Yes <input type="radio" name="can_low" value="0" checked="checked"> No<br><br>
+            <b>Can climb the tower: </b> <input type="radio" name="can_climb" value="1"> Yes <input type="radio" name="can_climb" value="0" checked="checked"> No<br><br>
 
             <b>What is the autonomous strategy</b><br>
             Where does the robot start? Does it move forward? Can it pass a defense? Does it have a ball?<br>
