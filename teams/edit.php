@@ -17,17 +17,18 @@ include_once "../core/team.php";
 		if ($team != null) {
 			echo "<script type=\"text/javascript\">";
 			echo "function load() { ";
-			
+
+		        echo "var form = document.getElementById(\"form\");";
 			foreach($team as $name => $value) {
-				echo "document.getElementById(\"" . $name . "\").value = \"" . $value . "\"; ";
+				echo "form." . $name . ".value = \"" . $value . "\"; ";
 			}
 						
-			echo "</script>\n";
+			echo "} </script>\n";
 		}
 	}
 	?>
-    <body>
-        <form method="post" action="/scout/core/edit_team.php">
+    <body onload="load()">
+        <form method="post" action="/scout/core/edit_team.php" id="form">
             <b>Team ID: </b> <input type="number" id="team_number" name="team_number" size="5" maxlength="5"><br>
             <b>Team name: </b> <input type="text" id="team_name" name="team_name"><br><br>
             
