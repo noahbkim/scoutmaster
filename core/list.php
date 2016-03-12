@@ -1,7 +1,7 @@
 <?php
 
-include_once "core/session.php";
-include_once "core/auth.php";
+include_once "session.php";
+include_once "auth.php";
 
 start();
 
@@ -23,8 +23,8 @@ if (!auth()) {
 		<?php
 		// Connect to DB
 		$servername = "localhost";
-		$username = "robot";
-		$password = "Teque449";
+		$username = "www-data";
+		$password = ";lkjfdsa";
 		$dbname = "teamdb";
 		$conn = new mysqli($servername, $username, $password, $dbname);
 		if ($conn->connect_error) { echo "DB connection failed"; }
