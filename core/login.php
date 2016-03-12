@@ -14,6 +14,7 @@ if (isset($_POST["username"], $_POST["password"])) {
     // Try to log in
     if (login($username, $password) == true) {
         header("Location: /scout/");
+        error_log("aaaaaaaaaaaaaaaaa");
     } else {
         header("Location: /scout/login.php?error=1");
     }

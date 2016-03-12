@@ -42,7 +42,7 @@ function user($username) {
     $statement->fetch();
 
     // Return
-    return array("statement" => $statement, "id" => $id, "hashed_password" => $hashed_password);
+    return array("exists" => ($statement->num_rows == 1), "id" => $id, "hashed_password" => $hashed_password);
 
 }
 
@@ -51,16 +51,15 @@ function login($username, $password) {
 
     // Query the database for the user
     $data = user($username);
-    $statement = $data["statement"];
 
-    echo $statemtent->num_rows . "\n";
-    echo $username . "\n";
+    //error_log(implode(", ", $data));
 
+    $exists = $data["exists"];
     $id = $data["id"];
     $hashed_password = $data["hashed_password"];
 
     // Assert there's only one user
-    if ($statement->num_rows == 1) {
+    if ($exists) {
 
         // If the credentials are correct
         if (password_verify($password, $hashed_password)) {
