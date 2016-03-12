@@ -26,6 +26,7 @@ start();
     
         <?php include ROOT."/template/navigation.php"; ?>
         <p>Scoutmaster is a comprehensive FRC scouting tool. It also happens to be the first iteration of the scoutmaster software family to ever be functionally completed and deployed! The current models are set up for the 2016 FRC game, Stronghold.</p>
+        <p>Noah Kim, George Klees, 2016</p>
         <a href="/scout/core/logout.php">Logout</a>
 
     <?php } else { // Otherwise show the login ?>

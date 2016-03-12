@@ -29,6 +29,15 @@ p {
 
 }
 
+table {
+    
+    width: 100%;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+    
+}
+
 textarea {
     
     width: 100%;
