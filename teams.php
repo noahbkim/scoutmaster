@@ -24,10 +24,10 @@
                 <option value="trends">Trends</option>
                 <option value="other">Other</option>
             </select><br>
-            If other, enter here: <input type="text" name="driver_system_other"><br>
+            If other, enter here: <input type="text" name="driver_system_other"><br><br>
             
             <b>Drive wheel diameter</b> (if applicable): <input type="text" name="drive_diameter"><br>
-            <b>Other info:</b><input type="text" name="drive_info"><br>
+            <b>Other info:</b><input type="text" name="drive_info"><br><br>
 
             <b>Can it score high/low goals? </b> <input type="checkbox" name="can_high_goal"> High <input type="checkbox" name="can_low_goal"> Low <br>
             How well? How fast (timewise/how many times per game)? Does it have automatic aiming? How does it do these things?<br>
@@ -39,7 +39,7 @@
             
             
             <b>Ball intake release strategy</b><br>
-            How does it drop them off? How long does it take? Are they kicked, launched, punched, or simply dropped?<br><input type="text" name="boulderdesc" style="height:200px;width:800px;"><br><br>
+            How does it drop them off? How long does it take? Are they kicked, launched, punched, or simply dropped?<br><input type="text" name="boulderdesc" style="height: 200px; width: 100%;"><br><br>
 
             <b>What defenses can the robot pass? How well can it pass them?</b><br>
             Category A: 
@@ -63,16 +63,16 @@
             <input type="text" name="autonomous_strategy" style="height: 200px; width: 100%;"><br><br>
             
             <b>What is the teleop strategy?</b><br>
-            <input type="text" name="teleopdesc" style="height:200px;width:800px;"><br><br>
+            <input type="text" name="teleopdesc" style="height: 200px; width: 100%;"><br><br>
 
             <b>Average points per match: </b> <input type="number" name="points"><br><br>
 
             <b>Their ideal team (desired robots in alliance)</b><br>
-            <input type="text" name="idealteam" style="height:200px;width:800px;"><br><br>
+            <input type="text" name="idealteam" style="height: 200px; width: 100%;"><br><br>
 
             <b>Overall evaluation</b><br>
             Would we want to be in an alliance with them? Are they good? Are they confident?
-            <input type="text" name="evaluation" style="height:200px;width:800px;"><br><br>
+            <input type="text" name="evaluation" style="height: 200px; width: 100%;"><br><br>
         </form>
     </body>
 </html>
