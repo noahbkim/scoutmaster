@@ -1,7 +1,10 @@
 <?php
 
-session_start();
+include_once "session.php";
+
 $_SESSION["secret"] = "";
-session_destroy();
+stop();
+
+header("Location: /scout/");
 
 ?>
