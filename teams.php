@@ -4,7 +4,7 @@
         <?php include "template/head.php"; ?>
     </head>
     <body>
-        <form>
+        <form mode="POST" action="core/submit.php">
             <b>Team ID: </b> <input type="number" name="team_number" size="5" maxlength="5"><br>
             <b>Team name: </b> <input type="text" name="team_name"><br><br>
             
@@ -73,6 +73,8 @@
             <b>Overall evaluation</b><br>
             Would we want to be in an alliance with them? Are they good? Are they confident?
             <input type="text" name="evaluation" style="height: 200px; width: 100%;"><br><br>
+            
+            <span style="text-align: right; width: 100%;"><input type="submit" value="Finish"></span>
         </form>
     </body>
 </html>
