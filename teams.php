@@ -31,11 +31,11 @@
 
             <b>Can it score high/low goals? </b> <input type="checkbox" name="can_high_goal"> High <input type="checkbox" name="can_low_goal"> Low <br>
             How well? How fast (timewise/how many times per game)? Does it have automatic aiming? How does it do these things?<br>
-            <input type="text" name="scoring_system" style="height: 200px; width: 100%;"><br><br>
+            <textarea name="scoring_system"><br><br>
 
             <b>Can it pick up boulders?</b> <input type="radio" name="can_boulder" value="yes"> Yes <input type="radio" name="can_boulder", value="no"> No <br>
             Where does it get the boulders from? What is the ball intake/release strategy?<br>
-            <input type="text" name="boulder_system" style="height: 200px; width: 100%;"><br><br>
+            <textarea name="boulder_system"><br><br>
             
             
             <b>Ball intake release strategy</b><br>
@@ -60,19 +60,19 @@
 
             <b>What is the autonomous strategy</b><br>
             Where does the robot start? Does it move forward? Can it pass a defense? Does it have a ball?<br>
-            <input type="text" name="autonomous_strategy" style="height: 200px; width: 100%;"><br><br>
+            <textarea name="autonomous_strategy"><br><br>
             
             <b>What is the teleop strategy?</b><br>
-            <input type="text" name="teleopdesc" style="height: 200px; width: 100%;"><br><br>
+            <textarea name="teleop_strategy"><br><br>
 
-            <b>Average points per match: </b> <input type="number" name="points"><br><br>
+            <b>Average points per match: </b> <input type="number" name="average_points"><br><br>
 
             <b>Their ideal team (desired robots in alliance)</b><br>
-            <input type="text" name="idealteam" style="height: 200px; width: 100%;"><br><br>
+            <textarea name="ideal_teams"><br><br>
 
             <b>Overall evaluation</b><br>
             Would we want to be in an alliance with them? Are they good? Are they confident?
-            <input type="text" name="evaluation" style="height: 200px; width: 100%;"><br><br>
+            <textarea name="overall_evaluation"><br><br>
             
             <span style="text-align: right; width: 100%;"><input type="submit" value="Finish"></span>
         </form>
