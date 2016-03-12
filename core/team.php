@@ -39,9 +39,9 @@ function get_teams() {
 
 // Get all information on a team
 function get_team($team_number) {
-	
-	// Create the database connection
-	$connection = new mysqli(HOSTNAME, USERNAME, PASSWORD, DATABASE);
+    
+    // Create the database connection
+    $connection = new mysqli(HOSTNAME, USERNAME, PASSWORD, DATABASE);
     if ($connection->connect_error) {
         echo "<p class=\"error\">Database error</p>";
     }
