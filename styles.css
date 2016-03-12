@@ -29,6 +29,12 @@ p {
 
 }
 
+textarea {
+    
+    width: 100%;
+    
+}
+
 #navigation {
     
     /* List configration. */
