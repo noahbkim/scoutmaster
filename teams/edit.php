@@ -1,20 +1,26 @@
+<?php 
+
+include_once "../core/team.php";
+
+?>
+
 <html>
     <head>
         <title>Scoutmaster</title>
         <?php include "../template/head.php"; ?>
     </head>
-	<?php
-	include_once "../core/team.php";
+	<?php	
 	
 	if (isset($_GET["id"])) {
 		$team = get_team($_GET["id"]);
+		
 		if ($team != null) {
-			echo "<script type=\"text/javascript\">";
+			echo "<script type=\"text/javascript\"><br>";
 			
-			echo "getElementById(\"team_number\").value = " . $team["team_number"] . ";";
-			echo "getElementById(\"team_name\").value = " . $team["team_name"] . ";";
+			echo "getElementById(\"team_number\").value = \"" . $team["team_number"] . "\";<br>";
+			echo "getElementById(\"team_name\").value = \"" . $team["team_name"] . "\";<br>";
 			
-			echo "</script>";
+			echo "</script><br>";
 		}
 	}
 	?>
