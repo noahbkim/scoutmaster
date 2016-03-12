@@ -6,6 +6,7 @@ include_once "legacy.php";
 
 start();
 
+// Check if the user is validly logged in
 function auth() {
 
     // Check if the credentials exist

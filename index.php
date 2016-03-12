@@ -23,11 +23,14 @@ start();
         <a href="core/logout.php">Logout</a>
 
     <?php } else { ?>
-
-        <form action="core/login.php" method="post" name="login">
-            <input type="password" name="secret"/>
-            <input type="submit" value="Submit">
-        </form>
+        
+        <div id="login">
+            <p>Login for scoutmaster is simple. All that is required is the site-wide password, which you can get from the scouting team leaders and members.<br></p>
+            <form action="core/login.php" method="post" name="login">
+                <input type="password" name="secret"/>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
 
     <?php }
 

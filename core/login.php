@@ -19,12 +19,12 @@ if ($_POST["secret"]) {
 
         // Set the session secret
         $_SESSION["secret"] = $secret_hash;
-        header("Location: /scout/index.php");
+        header("Location: /scout/");
 
     } else {
 
         // Send back to the login page with error
-        header("Location: /scout/login.php?error=" . urlencode("secret"));
+        header("Location: /scout/?error=" . urlencode("secret"));
 
     }
 

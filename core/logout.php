@@ -5,6 +5,6 @@ start();
 
 $_SESSION["secret"] = "";
 
-header("Location: /scout/?logout=1");
+header("Location: /scout/");
 
 ?>
