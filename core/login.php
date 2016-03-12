@@ -1,9 +1,11 @@
 <?php
 
 // Include and start session
+include_once "session.php";
 include_once "config.php";
 include_once "legacy.php";
-session_start();
+
+start();
 
 // Check if the credentials are set
 if ($_POST["secret"]) {

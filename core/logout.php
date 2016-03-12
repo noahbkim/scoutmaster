@@ -1,10 +1,10 @@
 <?php
 
 include_once "session.php";
+start();
 
 $_SESSION["secret"] = "";
-stop();
 
-header("Location: /scout/");
+header("Location: /scout/?logout=1");
 
 ?>
