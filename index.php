@@ -4,8 +4,8 @@
 include_once "scout/global.php";
 
 // Include files
-include_once $root."/core/session.php";
-include_once $root."/core/auth.php";
+include_once ROOT."/core/session.php";
+include_once ROOT."/core/auth.php";
 
 // Start the session
 start();
