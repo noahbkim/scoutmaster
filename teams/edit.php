@@ -21,15 +21,15 @@ enforce();
         <title>Scoutmaster</title>
         <?php include ROOT."/template/head.php"; ?>
         <script>
-            var form = document.getElementById("form");
-            function load(name, value) {
+            function assign(form, name, value) {
                 
                 // Probably a checkbox or radio button
-                if (typeof form[name] == "object") {
+                if (form[name].hasOwnProperty("length")) {
                     if (form[name][1].type == "checkbox") {
-                        form[name][1].checked = value;
+                        console.log(value);
+                        form[name][1].checked = value == "1" ? 1 : 0;
                     } else if (form[name][0].type == "radio") {
-                        form[name][value ? 0 : 1].checked = 1;
+                        form[name][value == "1" ? 0 : 1].checked = 1;
                     }
                 }
                 
@@ -37,6 +37,8 @@ enforce();
                 form[name].value = value;
                 
             }
+
+            function load() {}
         </script>
     
         <?php   
@@ -50,15 +52,14 @@ enforce();
             // Check if the team exists
             if ($team != null) {
         
-            
                 // Start a script that fills in the inputs
-                echo "<script type=\"text/javascript\">";
+                echo "<script type=\"text/javascript\">\n";
                 echo "function load() { ";
                 echo "var form = document.getElementById(\"form\");";
             
                 // Echo all the hardcoded updates
                 foreach($team as $name => $value) {
-                    echo "load(" . $name . ", " . $value . "); ";
+                    echo "assign(form, \"" . $name . "\", \"" . $value . "\"); ";
                 }
             
                 // End the script
@@ -91,7 +92,7 @@ enforce();
                 <option value="trends">Trends</option>
                 <option value="other">Other</option>
             </select><br>
-            If other, enter here: <input type="text" name="driver_system_other"><br><br>
+            If other, enter here: <input type="text" name="drive_system_other"><br><br>
             
             <b>Drive wheel diameter</b> (if applicable): <input type="text" name="drive_diameter"><br>
             <b>Other info:</b><input type="text" name="drive_info"><br><br>
