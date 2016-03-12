@@ -5,11 +5,6 @@ include_once "session.php";
 
 start();
 
-$connection = new mysqli(HOSTNAME, USERNAME, PASSWORD, DATABASE);
-if ($connection->connect_error) {
-    header("Location: /scout/?database_error=1");
-}
-
 $keys = [
 	"team_number",
 	"team_name",
@@ -39,20 +34,52 @@ $keys = [
 	"overall_evaluation"
 ];
 
-$values = [];
-foreach ($keys as $key) {
-    $values[$key] = "\"" + $_GET[$key] + "\"";
+function add() {
+
+	$connection = new mysqli(HOSTNAME, USERNAME, PASSWORD, DATABASE);
+	if ($connection->connect_error) {
+		echo "<p class=\"error\">Database error</p>";
+	}
+
+	$values = [];
+	foreach ($keys as $key) {
+	    $values[$key] = "\"" + $_GET[$key] + "\"";
+	}
+
+	$sql = "INSERT INTO teams (" . implode(", ", $keys) . ") VALUES (" . implode(", ", $values) . ");";
+
+	if ($connection->query($sql) === TRUE) {
+	    echo "<p class=\"info\">Submitted successfully</p>";
+	} else {
+	    echo $connection->error;
+	}
+
+	$connection->close();
+
 }
 
-$sql = "INSERT INTO teams (" . implode(", ", $keys) . ") VALUES (" . implode(", ", $values) . ")";
-
-if ($connection->query($sql) === TRUE) {
-    echo "Submitted successfully";
-} else {
-    error_log("******************\n\n");
-    echo $connection->error;
+if (!in_array(basename(__FILE__), get_included_files())) {
+	add();
 }
 
-$connection->close();
+function overview() {
+
+	$connection = new mysqli(HOSTNAME, USERNAME, PASSWORD, DATABASE);
+	if ($connection->connect_error) {
+		echo "<p class=\"error\">Database error</p>";
+	}
+	
+	$sql = "SELECT * FROM teams;";
+	$result = $connection->query($sql));
+	
+	while ($result->num_rows > 0) {
+		while($row = $result->fetch_assoc()) {
+			echo $row["team_number"] . ": " . $row["team_name"];
+		}
+	}
+	
+	$connection->close();
+
+}
 
 ?>
