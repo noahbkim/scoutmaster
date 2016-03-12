@@ -21,7 +21,7 @@ $teams = overview();
 		foreach ($teams as $team){
 			echo "<tr>";
 			echo "<td>" . $team["team_id"] . "</td>";
-			echo "<td>" . $row["team_name"] . "</td>";
+			echo "<td>" . $team["team_name"] . "</td>";
 			echo "</tr>";
 		}
 		?>
