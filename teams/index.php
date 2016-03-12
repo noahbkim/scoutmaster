@@ -45,5 +45,7 @@ $teams = get_teams();
             ?>
         
         </table>
+        <p style="float: left;">Click to edit or delete</p>
+	<p style="float: right;"><a href="https://robot.mbhs.edu/scout/teams/edit.php">Add new</a></p>
     </body>
 </html>

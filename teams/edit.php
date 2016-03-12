@@ -130,7 +130,8 @@ enforce();
             Would we want to be in an alliance with them? Are they good? Are they confident?
             <textarea name="overall_evaluation"></textarea><br><br>
             
-            <span style="text-align: right; width: 100%;"><input type="submit" value="Finish"></span>
+            <input type="submit" value="Finish">
+            <input type="button" onclick="javascript: window.location.href = 'https://robot.mbhs.edu/scout/teams/delete.php?id=' + document.getElementById('form').team_number.value" value="Delete">
         </form>
     </body>
 </html>
