@@ -33,26 +33,26 @@
             How well? How fast (timewise/how many times per game)? Does it have automatic aiming? How does it do these things?<br>
             <textarea name="scoring_system"></textarea><br><br>
 
-            <b>Can it pick up boulders?</b> <input type="radio" name="can_boulder" value="yes"> Yes <input type="radio" name="can_boulder", value="no"> No <br>
+            <b>Can it pick up boulders?</b> <input type="radio" name="can_boulder" value="1"> Yes <input type="radio" name="can_boulder", value="0"> No <br>
             Where does it get the boulders from? What is the ball intake/release strategy?<br>
             <textarea name="boulder_system"></textarea><br><br>
             
             <b>What defenses can the robot pass? How well can it pass them?</b><br>
             Category A:<br>
-            &nbsp;&nbsp;<input type="checkbox" name="can_portcullis" value="yes">Portcullis<br>
-            &nbsp;&nbsp;<input type="checkbox" name="can_cheval" value="yes">Cheval de Frise<br>
+            &nbsp;&nbsp;<input type="checkbox" name="can_portcullis" value="1">Portcullis<br>
+            &nbsp;&nbsp;<input type="checkbox" name="can_cheval" value="1">Cheval de Frise<br>
             Category B:<br> 
-            &nbsp;&nbsp;<input type="checkbox" name="can_moat" value="yes">Moat<br>
-            &nbsp;&nbsp;<input type="checkbox" name="can_ramparts" value="yes">Ramparts<br>
+            &nbsp;&nbsp;<input type="checkbox" name="can_moat" value="1">Moat<br>
+            &nbsp;&nbsp;<input type="checkbox" name="can_ramparts" value="1">Ramparts<br>
             Category C:<br>
-            &nbsp;&nbsp;<input type="checkbox" name="can_drawbridge" value="yes">Drawbridge<br>
-            &nbsp;&nbsp;<input type="checkbox" name="can_sally" value="yes">Sally Port<br>
+            &nbsp;&nbsp;<input type="checkbox" name="can_drawbridge" value="1">Drawbridge<br>
+            &nbsp;&nbsp;<input type="checkbox" name="can_sally" value="1">Sally Port<br>
             Category D:<br>
-            &nbsp;&nbsp;<input type="checkbox" name="can_rock" value="yes">Rock Wall<br>
-            &nbsp;&nbsp;<input type="checkbox" name="can_rough" value="yes">Rough Terrain<br>
+            &nbsp;&nbsp;<input type="checkbox" name="can_rock" value="1">Rock Wall<br>
+            &nbsp;&nbsp;<input type="checkbox" name="can_rough" value="1">Rough Terrain<br>
             <br>
             
-            <b>Can climb the tower: </b> <input type="radio" name="can_climb" value="yes"> Yes <input type="radio" name="can_climb" value="no"> No<br><br>
+            <b>Can climb the tower: </b> <input type="radio" name="can_climb" value="1"> Yes <input type="radio" name="can_climb" value="0"> No<br><br>
 
             <b>What is the autonomous strategy</b><br>
             Where does the robot start? Does it move forward? Can it pass a defense? Does it have a ball?<br>
