@@ -20,38 +20,56 @@ enforce();
     <head>
         <title>Scoutmaster</title>
         <?php include ROOT."/template/head.php"; ?>
-    </head>
-
-    <?php   
-
-    // Check if a team ID is specified  
-    if (isset($_GET["id"])) {
-    
-        // If so, get the team
-        $team = get_team($_GET["id"]);
-        
-        // Check if the team exists
-        if ($team != null) {
-        
-            // Start a script that fills in the inputs
-            echo "<script type=\"text/javascript\">";
-            echo "function load() { ";
-            echo "var form = document.getElementById(\"form\");";
-            
-            // Echo all the hardcoded updates
-            foreach($team as $name => $value) {
-                echo "form." . $name . ".value = \"" . $value . "\"; ";
+        <script>
+            var form = document.getElementById("form");
+            function load(name, value) {
+                
+                // Probably a checkbox or radio button
+                if (typeof form[name] == "object") {
+                    if (form[name][1].type == "checkbox") {
+                        form[name][1].checked = value;
+                    } else if (form[name][0].type == "radio") {
+                        form[name][value ? 0 : 1].checked = 1;
+                    }
+                }
+                
+                // Otherwise
+                form[name].value = value;
+                
             }
+        </script>
+    
+        <?php   
+
+        // Check if a team ID is specified  
+        if (isset($_GET["id"])) {
+    
+            // If so, get the team
+            $team = get_team($_GET["id"]);
+        
+            // Check if the team exists
+            if ($team != null) {
+        
             
-            // End the script
-            echo "} </script>\n";
+                // Start a script that fills in the inputs
+                echo "<script type=\"text/javascript\">";
+                echo "function load() { ";
+                echo "var form = document.getElementById(\"form\");";
+            
+                // Echo all the hardcoded updates
+                foreach($team as $name => $value) {
+                    echo "load(" . $name . ", " . $value . "); ";
+                }
+            
+                // End the script
+                echo "} </script>\n";
+    
+            }
     
         }
     
-    }
-    
-    ?>
-    
+        ?>
+    </head>
     <body onload="load()">
         <form method="post" action="/scout/post/team.php" id="form">
             <b>Team ID: </b> <input type="number" id="team_number" name="team_number" size="5" maxlength="5"><br>
@@ -84,7 +102,7 @@ enforce();
             How well? How fast (timewise/how many times per game)? Does it have automatic aiming? How does it do these things?<br>
             <textarea name="scoring_system"></textarea><br><br>
 
-            <b>Can it pick up boulders?</b> <input type="radio" name="can_boulder" value="1"> Yes <input type="radio" name="can_boulder", value="0" checked="checked"> No <br>
+            <b>Can it pick up boulders?</b> <input type="radio" name="can_boulder" value="1"> Yes <input type="radio" name="can_boulder" value="0" checked="checked"> No <br>
             Where does it get the boulders from? What is the ball intake/release strategy?<br>
             <textarea name="boulder_system"></textarea><br><br>
             
