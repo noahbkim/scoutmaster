@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Scoutmaster</title>
+        <?php include "template/head.php"; ?>
     </head>
     <body>
         <form>
