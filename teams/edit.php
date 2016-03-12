@@ -1,34 +1,57 @@
 <?php 
 
-include_once "../core/team.php";
+// Include the necessary files
+$path = $_SERVER['DOCUMENT_ROOT'];
+include_once $path."/core/session.php";
+include_once $path."/core/auth.php";
+include_once $path."/core/team.php";
+
+// Start the session
+start();
+
+// Check authentication
+enforce();
 
 ?>
 
 <html>
     <head>
         <title>Scoutmaster</title>
-        <?php include "../template/head.php"; ?>
+        <?php include $path."/template/head.php"; ?>
     </head>
-	<?php	
-	
-	if (isset($_GET["id"])) {
-		$team = get_team($_GET["id"]);
-		
-		if ($team != null) {
-			echo "<script type=\"text/javascript\">";
-			echo "function load() { ";
 
-		        echo "var form = document.getElementById(\"form\");";
-			foreach($team as $name => $value) {
-				echo "form." . $name . ".value = \"" . $value . "\"; ";
-			}
-						
-			echo "} </script>\n";
-		}
-	}
-	?>
+    <?php   
+
+    // Check if a team ID is specified  
+    if (isset($_GET["id"])) {
+    
+        // If so, get the team
+        $team = get_team($_GET["id"]);
+        
+        // Check if the team exists
+        if ($team != null) {
+        
+            // Start a script that fills in the inputs
+            echo "<script type=\"text/javascript\">";
+            echo "function load() { ";
+            echo "var form = document.getElementById(\"form\");";
+            
+            // Echo all the hardcoded updates
+            foreach($team as $name => $value) {
+                echo "form." . $name . ".value = \"" . $value . "\"; ";
+            }
+            
+            // End the script
+            echo "} </script>\n";
+    
+        }
+    
+    }
+    
+    ?>
+    
     <body onload="load()">
-        <form method="post" action="/scout/core/edit_team.php" id="form">
+        <form method="post" action="/scout/post/team.php" id="form">
             <b>Team ID: </b> <input type="number" id="team_number" name="team_number" size="5" maxlength="5"><br>
             <b>Team name: </b> <input type="text" id="team_name" name="team_name"><br><br>
             

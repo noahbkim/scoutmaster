@@ -7,6 +7,7 @@ function start() {
     }
 }
 
+// End the session
 function stop() {
     if (session_id() != "") {
         session_destroy();

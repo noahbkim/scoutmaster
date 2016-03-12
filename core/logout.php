@@ -1,10 +1,16 @@
 <?php
 
-include_once "session.php";
+// Include files
+$path = $_SERVER['DOCUMENT_ROOT'];
+include_once $path."/core/session.php";
+
+// Start the session
 start();
 
+// Remove cookies
 $_SESSION["secret"] = "";
 
-header("Location: /scout/");
+// Enforce authentication
+enforce();
 
 ?>
