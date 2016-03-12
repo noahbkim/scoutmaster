@@ -6,7 +6,7 @@
 	<?php
 	include_once "../core/team.php";
 	
-	if ($isset($_GET["id"])) {
+	if (isset($_GET["id"])) {
 		$team = get_team($_GET["id"]);
 		if ($team != null) {
 			echo "<script type=\"text/javascript\">";
