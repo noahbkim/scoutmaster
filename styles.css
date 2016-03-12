@@ -32,10 +32,28 @@ p {
 table {
     
     width: 100%;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border: 0px solid black;
     border-collapse: collapse;
+
+}
+
+tr {
     
+    height: 2em;
+    border-top: 1px solid black;
+
+}
+
+tr:first-of-type {
+
+    border-top: 0px solid black;
+
+}
+
+td { 
+
+    border: 0px solid black;
+
 }
 
 textarea {
@@ -51,11 +69,12 @@ textarea {
     /* List configration. */
     list-style-type: none;
     margin: 0;
+    margin-bottom: 1em;
     padding: 0;
 
     /* Overflow. */
     overflow: auto;
-        
+
 }
 
 #navigation li {
