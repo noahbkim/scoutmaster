@@ -3,10 +3,25 @@
         <title>Scoutmaster</title>
         <?php include "../template/head.php"; ?>
     </head>
+	<?php
+	include_once "../core/team.php";
+	
+	if ($isset($_GET["id"])) {
+		$team = get_team($_GET["id"]);
+		if ($team != null) {
+			echo "<script type=\"text/javascript\">";
+			
+			echo "getElementById(\"team_number\").value = " . $team["team_number"] . ";";
+			echo "getElementById(\"team_name\").value = " . $team["team_name"] . ";";
+			
+			echo "</script>";
+		}
+	}
+	?>
     <body>
         <form method="post" action="/scout/core/edit_team.php">
-            <b>Team ID: </b> <input type="number" name="team_number" size="5" maxlength="5"><br>
-            <b>Team name: </b> <input type="text" name="team_name"><br><br>
+            <b>Team ID: </b> <input type="number" id="team_number" name="team_number" size="5" maxlength="5"><br>
+            <b>Team name: </b> <input type="text" id="team_name" name="team_name"><br><br>
             
             <b>Primary scoring mechanism:</b>
             <select name="primary_mechanism">

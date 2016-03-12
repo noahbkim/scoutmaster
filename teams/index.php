@@ -13,8 +13,8 @@ $teams = overview();
         <table border="1">
 		
 		<tr>
-		<td>Team ID</td>
-		<td>Team name</td>
+		<td><b>Team ID</b></td>
+		<td><b>Team name</b></td>
 		</tr>
 		
 		<?php
