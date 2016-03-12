@@ -36,7 +36,7 @@ $teams = get_teams();
             
             // Generate the list of teams
             foreach ($teams as $team_id => $team_number) {
-                echo "<tr>";
+                echo "<tr onclick=\"javascript: window.location.href = \\\"/scout/teams/edit.php?id=" . $team_id . "\\\";\">";
                 echo "<td>" . $team_id . "</td>";
                 echo "<td>" . $team_number . "</td>";
                 echo "</tr>";
