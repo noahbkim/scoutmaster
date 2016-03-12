@@ -1,5 +1,6 @@
 <?php
 
+include_once "config.php";
 include_once "legacy.php";
 session_start();
 
