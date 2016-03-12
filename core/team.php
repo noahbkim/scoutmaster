@@ -7,21 +7,26 @@ start();
 
 function overview() {
 
-        $connection = new mysqli(HOSTNAME, USERNAME, PASSWORD, DATABASE);
-        if ($connection->connect_error) {
-                echo "<p class=\"error\">Database error</p>";
+    $connection = new mysqli(HOSTNAME, USERNAME, PASSWORD, DATABASE);
+    if ($connection->connect_error) {
+        echo "<p class=\"error\">Database error</p>";
+    }
+
+    $sql = "SELECT * FROM teams;";
+    $result = $connection->query($sql);
+
+    $teams = [];
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $teams[$row["team_number"]] = $row["team_name"];
         }
+    }
 
-        $sql = "SELECT * FROM teams;";
-        $result = $connection->query($sql);
+    $connection->close();
 
-        if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                        echo $row["team_number"] . "/ " . $row["team_name"];
-                }
-        }
+    return $teams;
 
-        $connection->close();
 }
 
 ?>

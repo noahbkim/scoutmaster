@@ -1,7 +1,7 @@
 <?php
 
-include_once "/scout/core/session.php";
-include_once "/scout/core/team.php";
+include_once "../core/session.php";
+include_once "../core/team.php";
 
 start();
 overview();
