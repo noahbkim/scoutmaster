@@ -1,10 +1,10 @@
 <html>
     <head>
         <title>Scoutmaster</title>
-        <?php include "/scout/template/head.php"; ?>
+        <?php include "../template/head.php"; ?>
     </head>
     <body>
-        <form mode="POST" action="core/edit_team.php">
+        <form method="post" action="/scout/core/edit_team.php">
             <b>Team ID: </b> <input type="number" name="team_number" size="5" maxlength="5"><br>
             <b>Team name: </b> <input type="text" name="team_name"><br><br>
             

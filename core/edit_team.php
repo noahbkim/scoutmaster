@@ -34,7 +34,7 @@ $keys = [
 	"overall_evaluation"
 ];
 
-function add() {
+
 
 	$connection = new mysqli(HOSTNAME, USERNAME, PASSWORD, DATABASE);
 	if ($connection->connect_error) {
@@ -43,10 +43,11 @@ function add() {
 
 	$values = [];
 	foreach ($keys as $key) {
-	    $values[$key] = "\"" + $_GET[$key] + "\"";
+	    $values[$key] = "\"" . $_POST[$key] . "\"";
 	}
 
-	$sql = "INSERT INTO teams (" . implode(", ", $keys) . ") VALUES (" . implode(", ", $values) . ");";
+	$sql = "REPLACE INTO teams (" . implode(", ", $keys) . ") VALUES (" . implode(", ", $values) . ");";
+        echo $sql;
 
 	if ($connection->query($sql) === TRUE) {
 	    echo "<p class=\"info\">Submitted successfully</p>";
@@ -56,8 +57,6 @@ function add() {
 
 	$connection->close();
 
-}
 
-add();
 
 ?>
