@@ -28,7 +28,7 @@ start();
     <?php } else { ?>
 
         <div id="login">
-            <p>Please enter the super secret passcode, which you can get from the scouting team leaders and members.<br></p>
+            <p>Please enter the super secret passcode.<br></p>
             <form action="core/login.php" method="post" name="login">
                 <input type="password" name="secret"/>
                 <input type="submit" value="Submit">
