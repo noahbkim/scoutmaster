@@ -1,8 +1,7 @@
 body {
     
     /* Page sizing. */
-    width: 50%;
-    min-width: 700px;
+    width: 700px;
     margin: auto;
     
     /* Spacing. */
@@ -10,10 +9,57 @@ body {
     
     /* Font and appearance. */
     font-family: Open Sans;
-    font-size: 14;
+    font-size: 16px;
     color: #111;
     background-color: #F0F0F0;
 
+}
+
+h1 {
+
+    /* Font and appearance. */
+    font-size: 24px;
+
+}
+
+#navigation {
+    
+    /* List configration. */
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    /* Overflow. */
+    overflow: auto;
+    
+    /* Appearance. */
+    font-size: 24px;
+    background-color: #333;
+    
+}
+
+#navigation li {
+    
+    /* Display. */
+    float: right;
+    
+}
+
+#navigation li a {
+
+    /* Display. */
+    display: block;
+    text-align: center;
+    padding: 1em 1em;
+    text-decoration: none;
+
+}
+
+#navigation li a:hover {
+    
+    /* Background color. */
+    background-color: #111;
+    
 }
 
 #login {
