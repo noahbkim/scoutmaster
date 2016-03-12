@@ -8,7 +8,7 @@ include_once "legacy.php";
 start();
 
 // Check if the credentials are set
-if ($_POST["secret"]) {
+if (isset($_POST["secret"])) {
 
     // Grab the credentials
     $secret = $_POST["secret"];
@@ -24,7 +24,7 @@ if ($_POST["secret"]) {
     } else {
 
         // Send back to the login page with error
-        header("Location: /scout/?error=" . urlencode("secret"));
+        header("Location: /scout/?error=1");
 
     }
 

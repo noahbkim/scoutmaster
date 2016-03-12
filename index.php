@@ -23,13 +23,16 @@ start();
         <a href="core/logout.php">Logout</a>
 
     <?php } else { ?>
-        
+
         <div id="login">
-            <p>Login for scoutmaster is simple. All that is required is the site-wide password, which you can get from the scouting team leaders and members.<br></p>
+            <p>Please enter the super secret passcode, which you can get from the scouting team leaders and members.<br></p>
             <form action="core/login.php" method="post" name="login">
                 <input type="password" name="secret"/>
                 <input type="submit" value="Submit">
             </form>
+            <?php if (isset($_GET["error"]) && $_GET["error"] == 1) {
+                echo "<p class=\"error\">Try again.</p>";
+            } ?>
         </div>
 
     <?php }

@@ -1,12 +1,12 @@
 body {
     
     /* Page sizing. */
-    width: 65%;
-    min-width: 650px;
+    width: 50%;
+    min-width: 700px;
     margin: auto;
     
     /* Spacing. */
-    margin-top: 2em;
+    margin-top: 5em;
     
     /* Font and appearance. */
     font-family: Open Sans;
@@ -16,10 +16,14 @@ body {
 
 }
 
-#id {
-    
+#login {
+
+    /* Margin. */
+    margin-top: 8em;
+
     /* Text. */
-    width: 40%;
     text-align: center;
     
 }
+
+.error { color: red; }
