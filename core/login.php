@@ -2,6 +2,7 @@
 
 // Include and start session
 include_once "config.php";
+include_once "legacy.php";
 start_session();
 
 // Check if the credentials are set
