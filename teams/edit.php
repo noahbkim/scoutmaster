@@ -15,12 +15,12 @@ include_once "../core/team.php";
 		$team = get_team($_GET["id"]);
 		
 		if ($team != null) {
-			echo "<script type=\"text/javascript\"><br>";
+			echo "<script type=\"text/javascript\">\n";
 			
-			echo "getElementById(\"team_number\").value = \"" . $team["team_number"] . "\";<br>";
-			echo "getElementById(\"team_name\").value = \"" . $team["team_name"] . "\";<br>";
+			echo "document.getElementById(\"team_number\").value = \"" . $team["team_number"] . "\";\n";
+			echo "document.getElementById(\"team_name\").value = \"" . $team["team_name"] . "\";\n";
 			
-			echo "</script><br>";
+			echo "</script>\n";
 		}
 	}
 	?>
