@@ -22,12 +22,12 @@ if (isset($_POST["secret"])) {
 
         // Set the session secret
         $_SESSION["secret"] = $secret_hash;
-        header("Location: /");
+        header("Location: /scout/");
 
     } else {
 
         // Send back to the login page with error
-        header("Location: /?error=1");
+        header("Location: /scout/?error=1");
 
     }
 

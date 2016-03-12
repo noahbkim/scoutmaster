@@ -20,7 +20,12 @@ $teams = get_teams();
 ?>
 
 <html>
+    <head>
+        <title>Scoutmaster Teams</title>
+        <?php include ROOT."/template/head.php"; ?>
+    </head>
     <body>
+        <?php include ROOT."/template/navigation.php"; ?>
         <table border="1">
             <tr>
                 <td><b>Team ID</b></td>

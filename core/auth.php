@@ -32,7 +32,7 @@ function enforce() {
 
     // Send the user to login
     if (!auth()) {
-        header("Location: /");
+        header("Location: /scout/");
     }
 
 }
