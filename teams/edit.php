@@ -15,11 +15,13 @@ include_once "../core/team.php";
 		$team = get_team($_GET["id"]);
 		
 		if ($team != null) {
-			echo "<script type=\"text/javascript\">\n";
+			echo "<script type=\"text/javascript\">";
+			echo "function load() { ";
 			
-			echo "document.getElementById(\"team_number\").value = \"" . $team["team_number"] . "\";\n";
-			echo "document.getElementById(\"team_name\").value = \"" . $team["team_name"] . "\";\n";
-			
+			foreach($team as $name => $value) {
+				echo "document.getElementById(\"" . $name . "\").value = \"" . $value . "\"; ";
+			}
+						
 			echo "</script>\n";
 		}
 	}
