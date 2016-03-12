@@ -42,16 +42,16 @@
             How does it drop them off? How long does it take? Are they kicked, launched, punched, or simply dropped?<br><input type="text" name="boulderdesc" style="height: 200px; width: 100%;"><br><br>
 
             <b>What defenses can the robot pass? How well can it pass them?</b><br>
-            Category A: 
+            Category A:<br>
             &nbsp;&nbsp;<input type="checkbox" name="can_portcullis" value="yes">Portcullis<br>
             &nbsp;&nbsp;<input type="checkbox" name="can_cheval" value="yes">Cheval de Frise<br>
-            Category B: 
+            Category B:<br> 
             &nbsp;&nbsp;<input type="checkbox" name="can_moat" value="yes">Moat<br>
             &nbsp;&nbsp;<input type="checkbox" name="can_ramparts" value="yes">Ramparts<br>
-            Category C: 
+            Category C:<br>
             &nbsp;&nbsp;<input type="checkbox" name="can_drawbridge" value="yes">Drawbridge<br>
             &nbsp;&nbsp;<input type="checkbox" name="can_sally" value="yes">Sally Port<br>
-            Category D: 
+            Category D:<br>
             &nbsp;&nbsp;<input type="checkbox" name="can_rock" value="yes">Rock Wall<br>
             &nbsp;&nbsp;<input type="checkbox" name="can_rough" value="yes">Rough Terrain<br>
             <br>
