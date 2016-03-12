@@ -1,9 +1,12 @@
 <?php
 
+// Global include
+include_once "scout/global.php";
+
 // Include and start session
-include_once "session.php";
-include_once "config.php";
-include_once "legacy.php";
+include_once $root."/core/config.php";
+include_once $root."/core/session.php";
+include_once $root."/core/legacy.php";
 
 start();
 

@@ -1,10 +1,12 @@
 <?php
 
+// Global include
+include_once "scout/global.php";
+
 // Include files
-$path = $_SERVER['DOCUMENT_ROOT'];
-include_once $path."/core/session.php";
-include_once $path."/core/config.php";
-include_once $path."/core/legacy.php";
+include_once $root."/core/session.php";
+include_once $root."/core/config.php";
+include_once $root."/core/legacy.php";
 
 // Start the session
 start();
