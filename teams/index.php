@@ -18,10 +18,10 @@ $teams = overview();
 		</tr>
 		
 		<?php
-		foreach ($teams as $team){
+		foreach ($teams as $team_id => $team_number) {
 			echo "<tr>";
-			echo "<td>" . $team["team_id"] . "</td>";
-			echo "<td>" . $team["team_name"] . "</td>";
+			echo "<td>" . $team_id . "</td>";
+			echo "<td>" . $team_number . "</td>";
 			echo "</tr>";
 		}
 		?>
