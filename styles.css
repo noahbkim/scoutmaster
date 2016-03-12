@@ -15,10 +15,16 @@ body {
 
 }
 
-h1 {
+a {
 
-    /* Font and appearance. */
-    font-size: 24px;
+    text-decoration: none;
+    color: black;
+
+}
+
+p {
+
+    font-size: 16px;
 
 }
 
@@ -31,11 +37,7 @@ h1 {
 
     /* Overflow. */
     overflow: auto;
-    
-    /* Appearance. */
-    font-size: 24px;
-    background-color: #333;
-    
+        
 }
 
 #navigation li {
@@ -50,16 +52,8 @@ h1 {
     /* Display. */
     display: block;
     text-align: center;
-    padding: 1em 1em;
-    text-decoration: none;
+    font-size: 26px;
 
-}
-
-#navigation li a:hover {
-    
-    /* Background color. */
-    background-color: #111;
-    
 }
 
 #login {
