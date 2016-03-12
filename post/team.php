@@ -40,6 +40,17 @@ $keys = [
     "overall_evaluation"
 ];
 
+?>
+
+<html>
+    <head>
+        <title>Team Submit</title>
+        <?php include ROOT."/template/head.php"; ?>
+    </head>
+    <body>
+
+<?php
+
 // Connect to the database
 $connection = new mysqli(HOSTNAME, USERNAME, PASSWORD, DATABASE);
 if ($connection->connect_error) {
@@ -58,13 +69,15 @@ $sql = "REPLACE INTO teams (" . implode(", ", $keys) . ") VALUES (" . implode(",
 // Query the database
 if ($connection->query($sql) === TRUE) {
     echo "<p class=\"info\">Submitted successfully</p>";
-    header("Refresh: 2; URL=https://robot.mbhs.edu/scout/");
+    header("Refresh: 2; URL=https://robot.mbhs.edu/scout/teams/");
 } else {
     echo $connection->error;
 }
 
 $connection->close();
 
-
-
 ?>
+
+    </body>
+</html>
+

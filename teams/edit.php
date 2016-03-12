@@ -19,7 +19,7 @@ enforce();
 <html>
     <head>
         <title>Scoutmaster</title>
-        <?php include $path."/template/head.php"; ?>
+        <?php include ROOT."/template/head.php"; ?>
     </head>
 
     <?php   
