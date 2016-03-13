@@ -57,6 +57,18 @@ $teams = get_teams();
     
         ?>
 
+	function sort_teams(attrib) {
+		teams.sort(function(a,b){
+			if (a[attrib] < b[attrib]) {
+				return -1;
+			}
+			if (a[attrib] > b[attrib]) {
+				return 1;
+			}
+			return 0;
+		});
+	}
+
 	function gen_team_tbl() {
 		// Create a table and its body
 		var tbl = document.createElement("table");
@@ -72,6 +84,10 @@ $teams = get_teams();
 
 			var text = document.createElement("b");
 			text.innerHTML = attribs_eng[attribs[j]];
+
+			td.onclick = function(){sort_teams(attribs[j]); load();}
+			console.log(td);
+			console.log(td.onclick);
 
 			td.appendChild(text);
 			tr.appendChild(td);
@@ -94,6 +110,9 @@ $teams = get_teams();
 	}
 
 	function load() {
+		var old_tbl = document.getElementById("teams_tbl");
+		if (old_tbl != null) old_tbl.parentElement.removeChild(old_tbl);
+
 		document.getElementsByTagName("body")[0].appendChild(gen_team_tbl());
 	}
     </script>

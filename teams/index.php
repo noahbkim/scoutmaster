@@ -26,6 +26,9 @@ $teams = get_teams();
     </head>
     <body>
         <?php include ROOT."/template/navigation.php"; ?>
+
+	<p><a href="https://robot.mbhs.edu/scout/teams/report.php">Team data report &rarr;</a></p>
+
         <table border="1">
             <tr>
                 <td><b>Team ID</b></td>
@@ -47,6 +50,5 @@ $teams = get_teams();
         </table>
         <p style="float: left;">Click to edit or delete</p>
 	<p style="float: right;"><a href="https://robot.mbhs.edu/scout/teams/edit.php">Add new</a></p><br><br>
-	<p style="font-size: 150%;"><a href="https://robot.mbhs.edu/scout/teams/report.php">Team data report</a></p>
     </body>
 </html>
