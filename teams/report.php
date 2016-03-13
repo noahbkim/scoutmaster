@@ -31,6 +31,12 @@ $teams = get_teams();
 	// Attributes to show
 	var attribs = ["team_number", "team_name", "average_points"];
 
+	// Meanings of attributes
+	var attribs_eng = {};
+	attribs_eng["team_number"] = "Team ID";
+	attribs_eng["team_name"] = "Team name";
+	attribs_eng["average_points"] = "Average points";
+
         <?php   
 
         // Check if a team ID is specified  
@@ -58,6 +64,19 @@ $teams = get_teams();
 		tbl.style.width = "100%";
 		tbl.setAttribute("border", "1");
 		var tbdy = document.createElement("tbody");
+
+		// Heading of table
+		var tr = document.createElement("tr");
+		for (var j = 0; j < attribs.length; j++) {
+			var td = document.createElement("td");
+
+			var text = document.createElement("b");
+			text.innerHTML = attribs_eng[attribs[j]];
+
+			td.appendChild(text);
+			tr.appendChild(td);
+		}
+		tbdy.appendChild(tr);
 
 		// Add certain attributes for every team
 		for (var i = 0; i < teams.length; i++) {
