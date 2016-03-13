@@ -63,10 +63,19 @@ $teams = get_teams();
 		for (var i = 0; i < teams.length; i++) {
 			var tr = document.createElement("tr");
 			for (var j = 0; j < attribs.length; j++) {
-				
+				var td = document.createElement("td");
+				td.appendChild(document.createTextNode(teams[i][attribs[j]]));
+				tr.appendChild(td);
 			}
+			tbdy.appendChild(tr);
 		}
-		
+
+		tbl.appendChild(tbdy);
+		return tbl;
+	}
+
+	function load() {
+		document.getElementsByTagName("body")[0].appendChild(gen_team_tbl());
 	}
     </script>
 
