@@ -92,7 +92,6 @@ enforce();
             <b>Team name: </b> <input type="text" name="team_name"><br><br>
 
             <b>Team starting position:</b><br>
-            <input type="hidden" name="start_position" value="group_flag">
             <input type="radio" name="start_position" value="portcullis"> Portcullis <br>
             <input type="radio" name="start_position" value="cheval"> Cheval de Frise <br>
             <input type="radio" name="start_position" value="moat"> Moat <br>
@@ -105,18 +104,23 @@ enforce();
             <input type="radio" name="start_position" value="spy"> Spy Bot <br>
             If other, enter here: <input type="text" name="start_position_other"><br><br>
 
-            <b>Drive type:</b>
-            <select name="drive_system">
-                <option value="omni">Omni</option>
-                <option value="mechanum">Mechanum</option>
-                <option value="pneumatic">Pneumatic</option>
-                <option value="trends">Trends</option>
-                <option value="other">Other</option>
-            </select><br>
-            If other, enter here: <input type="text" name="drive_system_other"><br><br>
-            
-            <b>Drive wheel diameter</b> (if applicable): <input type="text" name="drive_diameter"><br>
-            <b>Other info:</b><input type="text" name="drive_info"><br><br>
+            <input type="checkbox" name="autonomous_action" value="starts with a boulder"</input> Starts with a boulder <br>
+            <input type="checkbox" name="autonomous_action" value="reaches a defense"</input> Reaches a defense <br>
+            <input type="checkbox" name="autonomous_action" value="crosses a defense"</input> Crosses a defense <br>
+            <input type="checkbox" name="autonomous_action" value="attempts Low Goal"</input> Attempts a low goal <br>
+            <input type="checkbox" name="autonomous_action" value="scores Low Goal"</input> Scores a low goal <br>
+            <input type="checkbox" name="autonomous_action" value="attempts High Goal"</input> Attempts a high goal <br>
+            <input type="checkbox" name="autonomous_action" value="scores High Goal"</input> Scores a high goal <br>
+            <input type="checkbox" name="autonomous_action" value="positions itself to score after auto"</input> Positions itself to score after auto <br>
+            <input type="checkbox" name="autonomous_action" value="positions itself to cross a defense after auto"</input> Positions itself to cross a defense after auto <br>
+            <input type="checkbox" name="autonomous_action" value="crosses back into the neutral zone"</input> Crosses back into the neutral zone <br>
+            <input type="checkbox" name="autonomous_action" value="drops off a boulder in the courtyard"</input> Drops off a boulder in the courtyard <br>
+            <input type="checkbox" name="autonomous_action" value="nothing"</input> Nothing <br>
+            <input type="checkbox" name="autonomous_action" value="other"</input> Other: 
+                <input type="text" name="autonomous_action_other"><br><br>
+
+            <b>Drive wheel diameter</b> (if applicable): <input type="text" name="drive_diameter"><br>"</input>
+            <b>Other info:</b><input type="text" name="drive_info"><br><br>"</input>
 
             <input type="hidden" name="can_high_goal" value="0">
             <input type="hidden" name="can_low_goal" value="0">
