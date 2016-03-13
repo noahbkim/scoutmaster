@@ -72,16 +72,24 @@ enforce();
     </head>
     <body onload="load()">
         <form method="post" action="/scout/post/team.php" id="form">
+            <b>Author: </b> <input type="text" name="author"><br><br>
+            <b>Match number: </b> <input type="number" name="match_number" size="5" maxlength="5"><br>
             <b>Team number: </b> <input type="number" name="team_number" size="5" maxlength="5"><br>
             <b>Team name: </b> <input type="text" name="team_name"><br><br>
-            
-            <b>Primary scoring mechanism:</b>
-            <select name="primary_mechanism">
-                <option value="shoot">Shooting</option>
-                <option value="breach">Breaching</option>
-                <option value="other">Other</option>
-            </select><br>
-            If other, enter here: <input type="text" name="primary_mechanism_other"><br><br>
+
+            <b>Team starting position:</b><br>
+            <input type="hidden" name="start_position" value="group_flag">
+            <input type="radio" name="start_position" value="portcullis"> Portcullis <br>
+            <input type="radio" name="start_position" value="cheval"> Cheval de Frise <br>
+            <input type="radio" name="start_position" value="moat"> Moat <br>
+            <input type="radio" name="start_position" value="ramparts"> Ramparts <br>
+            <input type="radio" name="start_position" value="drawbridge"> Drawbridge <br>
+            <input type="radio" name="start_position" value="sally">  Sally Port <br>
+            <input type="radio" name="start_position" value="rock"> Rock Wall <br>
+            <input type="radio" name="start_position" value="rough"> Rough Terrain <br>
+            <input type="radio" name="start_position" value="low"> Low Bar <br>
+            <input type="radio" name="start_position" value="spy"> Spy Bot <br>
+            If other, enter here: <input type="text" name="start_position_other"><br><br>
 
             <b>Drive type:</b>
             <select name="drive_system">
@@ -96,6 +104,8 @@ enforce();
             <b>Drive wheel diameter</b> (if applicable): <input type="text" name="drive_diameter"><br>
             <b>Other info:</b><input type="text" name="drive_info"><br><br>
 
+            <input type="hidden" name="can_high_goal" value="0">
+            <input type="hidden" name="can_low_goal" value="0">
             <b>Can it score high/low goals? </b> <input type="checkbox" name="can_high_goal" value="1"> High <input type="checkbox" name="can_low_goal" value="1"> Low <br>
             How well? How fast (timewise/how many times per game)? Does it have automatic aiming? How does it do these things?<br>
             <textarea name="scoring_system"></textarea><br><br>
@@ -106,16 +116,24 @@ enforce();
             
             <b>What defenses can the robot pass? How well can it pass them?</b><br>
             Category A:<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_portcullis" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_portcullis" value="1">Portcullis<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_cheval" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_cheval" value="1">Cheval de Frise<br>
             Category B:<br> 
+            &nbsp;&nbsp;<input type="hidden" name="can_moat" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_moat" value="1">Moat<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_ramparts" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_ramparts" value="1">Ramparts<br>
             Category C:<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_drawbridge" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_drawbridge" value="1">Drawbridge<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_sally" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_sally" value="1">Sally Port<br>
             Category D:<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_rock" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_rock" value="1">Rock Wall<br>
+            &nbsp;&nbsp;<input type="hidden" name="can_rough" value="0">
             &nbsp;&nbsp;<input type="checkbox" name="can_rough" value="1">Rough Terrain<br>
             <br>
             
@@ -140,7 +158,6 @@ enforce();
             
             <input type="submit" value="Finish">
             <input type="button" onclick="javascript: window.location.href = 'https://robot.mbhs.edu/scout/teams/delete.php?id=' + document.getElementById('form').team_number.value" value="Delete">
-            <input type="button" onclick="javascript: window.location.href = 'https://robot.mbhs.edu/scout/teams/';" value="Back">
         </form>
     </body>
 </html>

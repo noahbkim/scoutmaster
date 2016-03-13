@@ -62,7 +62,7 @@ if ($connection->connect_error) {
 // Collect the values from POST
 $values = [];
 foreach ($keys as $key) {
-    $values[$key] = "\"" . $_POST[$key] . "\"";
+    $values[$key] = "\"" . (isset($_POST[$key]) ? $_POST[$key] : "0") . "\"";
 }
 
 // Assemble the SQL
