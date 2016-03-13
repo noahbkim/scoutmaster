@@ -25,7 +25,11 @@ $teams = get_teams();
         <?php include ROOT."/template/head.php"; ?>
 
 	<script type="text/javascript">
+	// Team data
 	var teams = [];
+
+	// Attributes to show
+	var attribs = ["team_number", "team_name", "average_points"];
 
         <?php   
 
@@ -47,7 +51,23 @@ $teams = get_teams();
     
         ?>
 
-	function load() { alert("Hi"); }
+	function gen_team_tbl() {
+		// Create a table and its body
+		var tbl = document.createElement("table");
+		tbl.id = "teams_tbl";
+		tbl.style.width = "100%";
+		tbl.setAttribute("border", "1");
+		var tbdy = document.createElement("tbody");
+
+		// Add certain attributes for every team
+		for (var i = 0; i < teams.length; i++) {
+			var tr = document.createElement("tr");
+			for (var j = 0; j < attribs.length; j++) {
+				
+			}
+		}
+		
+	}
     </script>
 
     </head>

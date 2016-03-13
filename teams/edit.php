@@ -24,11 +24,15 @@ enforce();
             function assign(form, name, value) {
                 
                 // Probably a checkbox or radio button
+                if (form[name].type == "checkbox") {
+                    form[name].checked = value == "1" ? 1 : 0;
+                }
                 if (form[name].hasOwnProperty("length")) {
-                    if (form[name].type == "checkbox") {
-                        form[name].checked = value == "1" ? 1 : 0;
-                    } else if (form[name][0].type == "radio") {
-                        form[name].value == "1" ? 0 : 1].checked = 1;
+                    if (form[name][0].type == "checkbox") {
+                        // This is a checkbox group
+                    }
+                    if (form[name][0].type == "radio") {
+                        form[name][value == "1" ? 0 : 1].checked = 1;
                     }
                 }
                 
