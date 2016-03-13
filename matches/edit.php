@@ -23,18 +23,32 @@ enforce();
         <script>
             function assign(form, name, value) {
                 
-                // Probably a checkbox or radio button
-                if (form[name].hasOwnProperty("length")) {
-                    if (form[name].type == "checkbox") {
-                        form[name].checked = value == "1" ? 1 : 0;
-                    } else if (form[name][0].type == "radio") {
-                        form[name].value == "1" ? 0 : 1].checked = 1;
+              // If single checkbox
+                if (form[name].type == "checkbox") {
+                    form[name].checked = value == "1" ? 1 : 0;
+                
+                // If list of elements
+                } else if (form[name].hasOwnProperty("length")) {
+                
+                    // If list of checkboxes
+                    if (form[name][0].type == "checkbox") {
+                        var selected = value.split(";");
+                        for (var i = 0; i < form[name].length; i++) {
+                            if (selected.indexOf(form[name][i].value) > -1) {
+                                form[name][i].checked = 1;
+                            }
+                        }
                     }
+                    
+                    // If list of radio buttons
+                    if (form[name][0].type == "radio") {
+                        form[name][value == "1" ? 0 : 1].checked = 1;
+                    }
+                
+                // Normal element
+                } else {                
+                    form[name].value = value;
                 }
-                
-                // Otherwise
-                form[name].value = value;
-                
             }
 
             function load() {}
