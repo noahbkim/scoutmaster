@@ -35,10 +35,10 @@ $teams = get_teams();
             <?php
             
             // Generate the list of teams
-            foreach ($teams as $team_id => $team_number) {
+            foreach ($teams as $team_id => $team) {
                 echo "<tr onclick=\"javascript: window.location.href = 'https://robot.mbhs.edu/scout/teams/edit.php?id=" . $team_id . "';\">";
                 echo "<td>" . $team_id . "</td>";
-                echo "<td style=\"width: 60%;\">" . $team_number . "</td>";
+                echo "<td style=\"width: 60%;\">" . $team["team_name"] . "</td>";
                 echo "</tr>";
             }
             
@@ -46,6 +46,7 @@ $teams = get_teams();
         
         </table>
         <p style="float: left;">Click to edit or delete</p>
-	<p style="float: right;"><a href="https://robot.mbhs.edu/scout/teams/edit.php">Add new</a></p>
+	<p style="float: right;"><a href="https://robot.mbhs.edu/scout/teams/edit.php">Add new</a></p><br><br>
+	<p style="font-size: 150%;"><a href="https://robot.mbhs.edu/scout/teams/report.php">Team data report</a></p>
     </body>
 </html>

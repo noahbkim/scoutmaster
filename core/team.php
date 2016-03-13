@@ -27,7 +27,7 @@ function get_teams() {
     $teams = [];
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $teams[$row["team_number"]] = $row["team_name"];
+            $teams[$row["team_number"]] = $row;
         }
     }
 
