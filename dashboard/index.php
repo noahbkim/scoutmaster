@@ -186,6 +186,7 @@
 				var width = canvas.width;
 				var context = canvas.getContext("2d");
 				
+                /*
 				// Draw the graphs
 				var i = 0;
 				var p = [];
@@ -196,7 +197,7 @@
 				for (var i = 0; i < p.length; i++) {
 					context.fillRect(i * xk + 2, p[i] * yk + 2, 6, 6);
 				}
-				
+				*/
 				
 				// Set the upate
 				setInterval(update, 100);
