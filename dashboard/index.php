@@ -184,7 +184,7 @@
 				var canvas = document.getElementById("canvas");
 				// var height = canvas.height;
 				// var width = canvas.width;
-				var context = canvas.getContext("2d");
+				// var context = canvas.getContext("2d");
 				
                 /*
 				// Draw the graphs
