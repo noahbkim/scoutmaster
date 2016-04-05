@@ -217,8 +217,8 @@
                 };
                 
                 // Send the request
-                xhttp.open("GET", "match.txt", true);
-                xhttp.send();
+                request.open("GET", "match.txt", true);
+                request.send();
                 
             }
 		
