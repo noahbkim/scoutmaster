@@ -1,12 +1,5 @@
 <html>
 	<head>
-		<script type="text/index" src="matches.txt" id="raw">
-			DELAY 0
-			RANK 3
-			1  | 3/19/16 11:00 PM | RED 1 559 449 | BLUE 123 34 35 | WIN | 10
-			12 | 3/20/16 10:43 AM | RED 1 2 3     | BLUE 4 449 6   | WIN | 3
-			15 | 3/20/16 10:55 AM | RED 7 8 449   | BLUE 10 11 12  | ?   | ?
-		</script>
 		<style>
 			body { margin: 3em 5em; font-family: Arial; }
 			table { width: 100%; font-size: 24px; margin-top: 1em; }
@@ -18,7 +11,7 @@
 			.clear { clear: both; }
 			.left { }
 			.right { float: right; }
-			#table { overflow: scroll; }
+			#table { overflow-y: scroll; }
 		</style>
 		<script type="text/javascript">
 			
@@ -210,10 +203,28 @@
 				setInterval(update, 100);
 				
 			}
+            
+            function start() {
+                
+                // Create an XHTTP request
+                var request = new XMLHttpRequest();
+                
+                // Callback for when it loads
+                request.onreadystatechange = function() {
+                    if (request.readyState == 4 && request.status == 200) {
+                       main();
+                    }
+                };
+                
+                // Send the request
+                xhttp.open("GET", "match.txt", true);
+                xhttp.send();
+                
+            }
 		
 		</script>
 	</head>
-	<body onload="javascript: main();">
+	<body onload="javascript: start();">
 		<h1>Matches</h1>
 		<div class="column"><div class="column-left">
 			<span class="left">Current time</span> <span id="clock" class="right">00:00:00</span><br>
