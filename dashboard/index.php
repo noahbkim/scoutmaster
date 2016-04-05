@@ -154,11 +154,10 @@
 				
 			}
 			
-			function main() {		
+			function main(raw) {		
 				
 				// Load the index
-				var index = document.getElementById("raw").innerHTML;
-				load(index);
+				load(raw);
 				
 				// Insert the matches into the table
 				var table = document.getElementById("matches");
@@ -212,12 +211,13 @@
                 // Callback for when it loads
                 request.onreadystatechange = function() {
                     if (request.readyState == 4 && request.status == 200) {
-                       main();
+                       var raw = request.responseText;
+                       main(raw);
                     }
                 };
                 
                 // Send the request
-                request.open("GET", "match.txt", true);
+                request.open("GET", "matches.txt", true);
                 request.send();
                 
             }
