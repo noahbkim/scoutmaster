@@ -182,8 +182,8 @@
 				var record = document.getElementById("record");
 				var points = document.getElementById("points");
 				var canvas = document.getElementById("canvas");
-				var height = canvas.height;
-				var width = canvas.width;
+				// var height = canvas.height;
+				// var width = canvas.width;
 				var context = canvas.getContext("2d");
 				
                 /*
