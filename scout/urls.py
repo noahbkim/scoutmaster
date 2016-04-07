@@ -16,9 +16,10 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-handler404 = 'app.views.404_view'
+import index.views
 
 urlpatterns = [
+    url(r"^$", index.views.index),
     url(r"^admin/", admin.site.urls),
     url(r"^dashboard/", include("dashboard.urls")),
     url(r"^scrape/", include("scrape.urls"))
