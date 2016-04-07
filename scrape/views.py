@@ -1,4 +1,8 @@
+from django import http
 from django.shortcuts import render
+from constants import *
+
+import scraper
 
 # Create your views here.
 def scrape(request):

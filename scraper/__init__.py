@@ -40,7 +40,7 @@ def scrape(path: str, prefix: str=PREFIX) -> dict:
     specified by prefix.
     """
     
-    response = raw(path, prefix=prefix):
+    response = raw(path, prefix=prefix)
     if response:
         return json.loads(response)
 

@@ -21,4 +21,5 @@ handler404 = 'app.views.404_view'
 urlpatterns = [
     url(r"^admin/", admin.site.urls),
     url(r"^dashboard/", include("dashboard.urls")),
+    url(r"^scrape/", include("scrape.urls"))
 ]
