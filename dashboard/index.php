@@ -1,17 +1,23 @@
 <html>
 	<head>
 		<style>
+                        h1 { margin-bottom: 0; }
 			body { margin: 3em 5em; font-family: Arial; }
-			table { width: 100%; font-size: 24px; margin-top: 1em; }
+			table { width: 100%; font-size: 24px; margin-top: 1em; border-collapse: collapse; }
 			canvas { margin-top: 1em; }
-			.column { width: 33%; float: left; font-size: 24px; }
-			.column-left { padding-right: 1em; }
-			.column-middle { padding: 0 1em; }
-			.column-right { margin-left: 1em; }
+                        .columns { display: flex; display: -webkit-flex; flex-wrap: wrap; justify-content: center; margin-top: 0; }
+			.column { float: left; font-size: 24px; min-width: 320px; max-width: 450px; flex-grow: 1; margin: 0.8em 1em 0 1em; }
+			.column-left { }
+                        .column-middle { }
+			.column-right { }
 			.clear { clear: both; }
 			.left { }
 			.right { float: right; }
-			#table { overflow-y: scroll; }
+			#table { min-height: 15em; }
+
+                        @media only screen and (max-device-width : 640px) {
+                            body { font-size: inherit; }
+                        }
 		</style>
 		<script type="text/javascript">
 			
@@ -163,9 +169,18 @@
 				var table = document.getElementById("matches");
 				for (var i = 0; i < matches.length; i++) {
 					var match = matches[i];
+
+                                        if (!(match.red.indexOf(449) > -1 || match.blue.indexOf(449) > -1)) continue;
+
 					var row = document.createElement("tr");
 					row.id = match.number;
 					row.innerHTML = match.toRow();
+
+                                        // If a new day
+                                        if (i > 0 && match.date.getDate() != matches[i-1].date.getDate()) {
+                                            row.style.borderTop = "1px dashed gray";
+                                        }
+
 					table.appendChild(row);
 				}
 				
@@ -227,23 +242,25 @@
 	</head>
 	<body onload="javascript: start();">
 		<h1>Matches</h1>
-		<div class="column"><div class="column-left">
-			<span class="left">Current time</span> <span id="clock" class="right">00:00:00</span><br>
-			<span class="left">Until next match</span> <span id="countdown" class="right">00:00</span><br>
-			<span class="left">Competition delay</span> <span id="delay" class="right">0m</span><br>
-		</div></div>
-		<div class="column"><div class="column-middle">
-			<span class="left">Upcoming alliance</span> <span id="alliance" class="right">0, 0, 0</span><br>
-			<span class="left">Upcoming opposition</span> <span id="opposition" class="right">0, 0, 0</span><br>
-			<span class="left">Upcoming color</span> <span id="color" class="right">None</span><br>
-		</div></div>
-		<div class="column"><div class="column-right">
-			<span class="left">Match record</span> <span id="record" class="right">0-0-0</span><br>
-			<span class="left">Ranking points</span> <span id="points" class="right">0</span><br>
-			<span class="left">Competition rank</span> <span id="rank" class="right">0</span><br>
-		</div></div>
-		<div class="clear"></div>
-		<!--canvas id="canvas" width=810 height=100>HTML 5 not available!</canvas-->
+                <div class="columns">
+			<div class="column column-left">
+				<span class="left">Current time</span> <span id="clock" class="right">00:00:00</span><br>
+				<span class="left">Until next match</span> <span id="countdown" class="right">00:00</span><br>
+				<span class="left">Competition delay</span> <span id="delay" class="right">0m</span><br>
+			</div>
+			<div class="column column-middle">
+				<span class="left">Upcoming alliance</span> <span id="alliance" class="right">0, 0, 0</span><br>
+				<span class="left">Upcoming opposition</span> <span id="opposition" class="right">0, 0, 0</span><br>
+				<span class="left">Upcoming color</span> <span id="color" class="right">None</span><br>
+			</div>
+			<div class="column column-right">
+				<span class="left">Match record</span> <span id="record" class="right">0-0-0</span><br>
+				<span class="left">Ranking points</span> <span id="points" class="right">0</span><br>
+				<span class="left">Competition rank</span> <span id="rank" class="right">0</span><br>
+			</div>
+			<div class="clear"></div>
+		</div>
+                <!--canvas id="canvas" width=810 height=100>HTML 5 not available!</canvas-->
 		<div id="table">
 			<table id="matches">
 				<tr>
