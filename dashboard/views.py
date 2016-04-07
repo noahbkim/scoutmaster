@@ -4,9 +4,10 @@ from django import http
 from django.shortcuts import render
 from django.template import loader
 
-from . import model
+from . import models
 import scraper
 import requests
+from constants import *
 
 # Create your views here.
 def index(request):
@@ -21,6 +22,6 @@ def index(request):
 def scrape(request):
 
     if REQUEST in request.GET:
-        return http.HttpResponse(json.dumps(scraper.scrape(path)))
+        return http.HttpResponse(json.dumps(scraper.scrape(request.GET[REQUEST])))
     else:
         return http.HttpResponse("No request specified")
