@@ -1,6 +1,10 @@
 <html>
     <body>
         Hello, world!
-        {% print("hello, world") %}
+        <ul>
+        {% for match in matches %}
+            <li>{{ match.number }} - {{ match.red }}</li>
+        {% endfor %}
+        </ul>
     </body>
 </html>
