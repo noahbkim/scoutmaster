@@ -4,38 +4,38 @@
 		var now = new Date(Date.now());
 				
 		function scrape(path) {
-			
 			// Create the request
 			var request = new XMLHttpRequest();
 			var url = "/scout/scrape?request=" + path;
-			
 			// Send the request
 			request.open("GET", url, false);
 			request.send();
-			
+			// Process the request
 			if (request.readyState == 4 && request.status == 200) {
 				var data = JSON.parse(request.responseText);
 				return data;
 			}
-		
 		}
 		
 		function getCurrentMatch() {
-			
+			// Get the list of events
 			data = scrape("events/" + now.getFullYear());
-			
-			for (var i = 0; i < data.length; i++) {
-				
+			// Start with the first event
+			var i = 0;
+			var next = data[0];
+			while (i < data.length) {
 				var event = data[i];
-				var start = event.start_date.replace("-", "/").replace("-", "/");
-				var end = event.end_date.replace("-", "/").replace("-", "/");
-				if (start < now && now < end) {
-					return event;
-				}
-				
+				var end = new Date(event.end_date.replace("-", "/").replace("-", "/"));
+				if (now < end) next = data[i];
+				i++;
 			}
-
-			
+			// If it's past the last match, return null
+			if (i == data.length) {
+				var start = new Date(event.start_date.replace("-", "/").replcae("-", "/"));
+				if (now > end) next = null;
+			}
+			// Return
+			return next;
 		}
 		
 	</script>
