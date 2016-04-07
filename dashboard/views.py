@@ -1,8 +1,10 @@
+import json
+
 from django import http
 from django.shortcuts import render
 from django.template import loader
-from . import models
 
+from . import model
 import scraper
 import requests
 
@@ -10,11 +12,15 @@ import requests
 def index(request):
 
     matches = []
-    for data in scraper.scrape("event/2016chcmp/matches"):
-        matches.append(models.Match.load(data))
-
-    matches = list(sorted(matches, key=lambda m: m.number))
+    for data in scraper.scrape("event/2016chcmp"):
+        matches.append(model.Match.load(data))
     
     context = {"matches": matches}
     return render(request, "dashboard/index.html", context)
 
+def scrape(request):
+
+    if REQUEST in request.GET:
+        return http.HttpResponse(json.dumps(scraper.scrape(path)))
+    else:
+        return http.HttpResponse("No request specified")

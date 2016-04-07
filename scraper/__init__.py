@@ -1,10 +1,11 @@
 # Multipurpose scoutmaster scraper
 
 # Imports
-import os, sys
-sys.path.append(os.path.abspath(".."))
+import os
 import requests
 import json
+
+from constants import *
 
 # Basic headers
 HEADERS = {"Host": "www.thebluealliance.com", "X-TBA-App-Id": "frc449:scout:0"}
@@ -32,4 +33,3 @@ def scrape(path: str, prefix: str=PREFIX) -> dict:
 
     # Otherwise, return None
     return None
-
