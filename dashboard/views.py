@@ -18,10 +18,3 @@ def index(request):
     
     context = {"matches": matches}
     return render(request, "dashboard/index.html", context)
-
-def scrape(request):
-
-    if REQUEST in request.GET:
-        return http.HttpResponse(json.dumps(scraper.scrape(request.GET[REQUEST])))
-    else:
-        return http.HttpResponse("No request specified")
