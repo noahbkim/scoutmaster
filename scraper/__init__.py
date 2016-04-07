@@ -33,5 +33,3 @@ def scrape(path: str, prefix: str=PREFIX) -> dict:
     # Otherwise, return None
     return None
 
-import pprint
-pprint.pprint(scrape("event/2016chcmp"))

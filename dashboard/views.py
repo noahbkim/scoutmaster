@@ -10,7 +10,7 @@ import requests
 def index(request):
 
     matches = []
-    for (data in scraper.scrape("event/2016chcmp")):
+    for data in scraper.scrape("event/2016chcmp"):
         matches.append(model.Match.load(data))
     
     context = {"matches": matches}
