@@ -2,32 +2,28 @@
 	<script type="text/javascript">
 		
 		var now = new Date(Date.now());
-		
-		function scrape(path, callback) {
+				
+		function scrape(path) {
 			
 			// Create the request
 			var request = new XMLHttpRequest();
 			var url = "https://robot.mbhs.edu/scout/scrape?request=" + path;
-
-			// Set the callback for the request
-			request.onreadystatechange = function() {
-				if (request.readyState == 4 && request.status == 200) {
-					var data = JSON.parse(request.responseText);
-					callback(data);
-				}
-			};
 			
 			// Send the request
-			request.open("GET", url, true);
+			request.timeout = 4000;
+			request.open("GET", url, false);
 			request.send();
+			
+			if (request.readyState == 4 && request.status == 200) {
+				var data = JSON.parse(request.responseText);
+				return data;
+			}
 		
 		}
 		
-		function getCurrentMatch(data) {
+		function getCurrentMatch() {
 			
-			if (data === undefined) { scrape("events/" + now.getFullYear(), getCurrentMatch); return; }
-			
-			console.log(data);
+			data = scrape("events/" + now.getFullYear());
 			
 			for (var i = 0; i < data.length; i++) {
 				
