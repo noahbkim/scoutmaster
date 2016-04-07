@@ -1,10 +1,50 @@
 <html>
+	<script type="text/javascript">
+		
+		var now = new Date(Date.now());
+		
+		function scrape(path, callback) {
+			
+			// Create the request
+			var request = new XMLHttpRequest();
+			var url = "https://robot.mbhs.edu/scrape?request=" + path;
+
+			// Set the callback for the request
+			request.onreadystatechange = function() {
+				if (request.readyState == 4 && request.status == 200) {
+					var data = JSON.parse(request.responseText);
+					callback(data);
+				}
+			};
+			
+			// Send the request
+			request.open("GET", url, true);
+			request.send();
+		
+		}
+		
+		function getCurrentMatch(data) {
+			
+			if (data === undefined) { return getCurrentMatch(scrape("events/" + now.getFullYear())); }
+			
+			console.log(data);
+			
+			for (var i = 0; i < data.length; i++) {
+				
+				var event = data[i];
+				var start = event.start_date.replace("-", "/").replace("-", "/");
+				var end = event.end_date.replace("-", "/").replace("-", "/");
+				if (start < now && now < end) {
+					return event;
+				}
+				
+			}
+
+			
+		}
+		
+	</script>
     <body>
-        Hello, world!
-        <ul>
-        {% for match in matches %}
-            <li>{{ match.number }} - {{ match.red }}</li>
-        {% endfor %}
-        </ul>
+		
     </body>
 </html>
