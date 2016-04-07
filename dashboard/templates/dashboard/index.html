@@ -25,7 +25,7 @@
 		
 		function getCurrentMatch(data) {
 			
-			if (data === undefined) { return getCurrentMatch(scrape("events/" + now.getFullYear())); }
+			if (data === undefined) { scrape("events/" + now.getFullYear(), getCurrentMatch); return; }
 			
 			console.log(data);
 			
