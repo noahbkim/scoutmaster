@@ -1,21 +1,18 @@
 #content {
-    width: 100%; 
+    width: 960px;
+    margin: 2em auto; 
 }
 
 #content .columns { 
     width: 100%;
-    margin: 0 auto;
-    max-width: 1000px;
-    text-align: justify; 
-    text-justify: distribute-all-lines; 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #content .column { 
-    width: 33%;
-    height: 125px;
-    background-color: gray; 
-    vertical-align: top; 
-    display: inline-block; 
+    width: 31%;
+    background-color: #DDD; 
 }
 
 #content .stretch { 
@@ -25,21 +22,9 @@
     line-height: 0; 
 }
 
-/* smartphones, iPhone, portrait 480x320 phones */
-@media (min-width: 320px) { }
-
-/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
-@media (min-width: 481px) { }
-
-/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
-@media (min-width: 641px) { }
-
-/* tablet, landscape iPad, lo-res laptops ands desktops */ 
-@media (min-width: 961px) { }
-
-/* big landscape tablets, laptops, and desktops */
-@media (min-width: 1025px) { }
-
-/* hi-res laptops and desktops */
-@media (min-width: 1281px) { }
+@media (max-width: 959px) {
+    #content { width: 100%; }
+    #content .columns { flex-direction: column; }
+    #content .column { width: 100%; margin-top: 1em; }    
+}
 
