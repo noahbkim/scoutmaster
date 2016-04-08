@@ -1,5 +1,5 @@
 body {
-	font-family: Arial;
+    font-family: Arial;
 }
 
 #content {
@@ -12,7 +12,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-	font-size: 20px;
+    font-size: 20px;
 }
 
 #content .column { 
@@ -27,8 +27,8 @@ body {
 }
 
 #content .right {
-	display: block;
-	float: right;
+    display: block;
+    float: right;
 }
 
 @media (max-width: 999px) {

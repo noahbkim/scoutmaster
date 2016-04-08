@@ -5,58 +5,58 @@
         <script type="text/javascript" src="{% static "api.js" %}"></script>
         <script type="text/javascript" src="{% static "util.js" %}"></script>
         <script type="text/javascript">
-			
-			var loaded = false;
-			
-			function loadComponents() {
-				var clock = document.getElementById("clock");
-				var countdown = document.getElementById("countdown");
-				var alliance = document.getElementById("alliance");
-				var opposition = document.getElementById("opposition");
-				var color = document.getElementById("color");
-				var record = document.getElementById("record");
-				var points = document.getElementById("points");
-				loaded = true;
-			}
-			
-			function updateComponents() {
-				var now = new Date(Date.now());
-				if (!loaded) return;
-				clock.innerHTML = formatDigitalTime(now);
-			}
-			
-			function updateData() {
-				
-			}
-			
-			function onLoad() {
-				loadComponents();
-				setInterval(updateComponents, 0.2*1000);
-				setTimeout(updateData, 60*1000);
-			}
-			
+            
+            var loaded = false;
+            
+            function loadComponents() {
+                var clock = document.getElementById("clock");
+                var countdown = document.getElementById("countdown");
+                var alliance = document.getElementById("alliance");
+                var opposition = document.getElementById("opposition");
+                var color = document.getElementById("color");
+                var record = document.getElementById("record");
+                var points = document.getElementById("points");
+                loaded = true;
+            }
+            
+            function updateComponents() {
+                var now = new Date(Date.now());
+                if (!loaded) return;
+                clock.innerHTML = formatDigitalTime(now);
+            }
+            
+            function updateData() {
+                
+            }
+            
+            function onLoad() {
+                loadComponents();
+                setInterval(updateComponents, 0.2*1000);
+                setTimeout(updateData, 60*1000);
+            }
+            
         </script>
     </head>
     <body onload="javascript: onLoad();">
         <div id="content">
             <div class="columns">
                 <div class="columns">
-			<div class="column column-left">
-				<span class="left">Current time</span> <span id="clock" class="right">00:00:00</span><br>
-				<span class="left">Until next match</span> <span id="countdown" class="right">00:00</span><br>
-				<span class="left">Competition delay</span> <span id="delay" class="right">0m</span><br>
-			</div>
-			<div class="column column-middle">
-				<span class="left">Upcoming alliance</span> <span id="alliance" class="right">0, 0, 0</span><br>
-				<span class="left">Upcoming opposition</span> <span id="opposition" class="right">0, 0, 0</span><br>
-				<span class="left">Upcoming color</span> <span id="color" class="right">None</span><br>
-			</div>
-			<div class="column column-right">
-				<span class="left">Match record</span> <span id="record" class="right">0-0-0</span><br>
-				<span class="left">Ranking points</span> <span id="points" class="right">0</span><br>
-				<span class="left">Competition rank</span> <span id="rank" class="right">0</span><br>
-			</div>
-		</div>
+            <div class="column column-left">
+                <span class="left">Current time</span> <span id="clock" class="right">00:00:00</span><br>
+                <span class="left">Until next match</span> <span id="countdown" class="right">00:00</span><br>
+                <span class="left">Competition delay</span> <span id="delay" class="right">0m</span><br>
+            </div>
+            <div class="column column-middle">
+                <span class="left">Upcoming alliance</span> <span id="alliance" class="right">0, 0, 0</span><br>
+                <span class="left">Upcoming opposition</span> <span id="opposition" class="right">0, 0, 0</span><br>
+                <span class="left">Upcoming color</span> <span id="color" class="right">None</span><br>
+            </div>
+            <div class="column column-right">
+                <span class="left">Match record</span> <span id="record" class="right">0-0-0</span><br>
+                <span class="left">Ranking points</span> <span id="points" class="right">0</span><br>
+                <span class="left">Competition rank</span> <span id="rank" class="right">0</span><br>
+            </div>
+        </div>
             </div>
         </div>
     </body>
