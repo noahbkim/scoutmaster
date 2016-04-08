@@ -2,9 +2,8 @@
     <head>
         {% load staticfiles %}
         <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}">
-		<link rel="stylesheet" type="text/css" href="file:///Users/Noah/Repositories/scoutmaster/static/styles.css">
         <script type="text/javascript" src="{% static "api.js" %}"></script>
-		<script type="text/javascript" src="{% static "api.js" %}"></script>
+        <script type="text/javascript" src="{% static "util.js" %}"></script>
         <script type="text/javascript">
 			
 			var loaded = false;
@@ -32,8 +31,8 @@
 			
 			function onLoad() {
 				loadComponents();
-				setInterval(0.2*1000, updateComponents());
-				setTimeout(60*1000, updateData());
+				setInterval(updateComponents, 0.2*1000);
+				setTimeout(updateData, 60*1000);
 			}
 			
         </script>
