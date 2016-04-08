@@ -1,9 +1,26 @@
 <html>
-	<script type="text/javascript" src="{% static "api.js" %}"></script>
-    <script type="text/javascript">
-        console.log(getRanking("2016chcmp", "frc449"));
-    </script>
+    <head>
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}">
+        <script type="text/javascript" src="{% static "api.js" %}"></script>
+        <script type="text/javascript">
+
+        </script>
+    </head>
     <body>
-	   
+        <div id="content">
+            <div id="columns">
+                <div class="column">
+                    Hello
+                </div>
+                <div class="column">
+                    How
+                </div>
+                <div class="column">
+                    Are
+                </div>
+                <span class="stretch"></span>
+            </div>
+        </div>
     </body>
 </html>

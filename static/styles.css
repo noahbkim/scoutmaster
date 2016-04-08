@@ -1,0 +1,3 @@
+#content .columns { text-align: justify; text-justify: distribute-all-lines; }
+#content .column  { background-color: gray; vertical-align: top; display: inline-block; *display: inline; }
+#content .stretch { width: 100%; display: inline-block; font-size: 0; line-height: 0; }
