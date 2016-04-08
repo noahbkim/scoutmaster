@@ -1,5 +1,6 @@
 <html>
-	<script type="text/javascript" src="{% static "api.js" %}"></script>
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static "api.js" %}"></script>
     <script type="text/javascript">
         console.log(getRanking("2016chcmp", "frc449"));
     </script>
