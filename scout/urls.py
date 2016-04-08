@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views import static
 
 import index.views
 
@@ -22,5 +23,6 @@ urlpatterns = [
     url(r"^$", index.views.index),
     url(r"^admin/", admin.site.urls),
     url(r"^dashboard/", include("dashboard.urls")),
-    url(r"^scrape/", include("scrape.urls"))
+    url(r"^scrape/", include("scrape.urls")),
+    url(r"^static/(?P<path>.*)$", static.serve, {"document_root": "/var/www/scout/static"})
 ]
