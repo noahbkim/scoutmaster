@@ -1,38 +1,134 @@
 <html>
     <head>
         {% load staticfiles %}
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}">
         <script type="text/javascript" src="{% static "api.js" %}"></script>
         <script type="text/javascript" src="{% static "util.js" %}"></script>
         <script type="text/javascript">
             
             var loaded = false;
-            
+            var rowsLoaded = false;
+            var team = "frc449";            
+            var clock, countdown, alliance, opposition, color, record, points, rank;
+            var matches, rankings;
+
+            function teamsToString(teams) {
+                return teams.map(function(team) { return team.substr(3); }).join(", ");
+            }
+
+            function resultToString(alliances) {
+                var red = alliances.red;
+                var blue = alliances.blue;
+                if (red.score == -1 && blue.score == -1) return "";
+                if (red.score > blue.score && red.teams.indexOf(team) > -1) return "W";
+                return "L";
+            }
+
+            function defaultRow() {
+                return "<tr><td>#</td><td>Time</td><td>Red alliance</td><td>Blue alliance</td><td>Result</td></tr>"; 
+            }
+
+            function matchToRow(match) {
+                var out = "";
+                out += "<td>" + match.match_number + "</td>";
+                out += "<td>" + formatDigitalTime(new Date(match.time * 1000)) + "</td>";
+                out += "<td>" + teamsToString(match.alliances.red.teams) + "</td>";
+                out += "<td>" + teamsToString(match.alliances.blue.teams) + "</td>";
+                out += "<td>" + resultToString(match.alliances) + "</td>";
+                return out;
+            }
+
             function loadComponents() {
-                var clock = document.getElementById("clock");
-                var countdown = document.getElementById("countdown");
-                var alliance = document.getElementById("alliance");
-                var opposition = document.getElementById("opposition");
-                var color = document.getElementById("color");
-                var record = document.getElementById("record");
-                var points = document.getElementById("points");
+                clock = document.getElementById("clock");
+                countdown = document.getElementById("countdown");
+                alliance = document.getElementById("alliance");
+                opposition = document.getElementById("opposition");
+                color = document.getElementById("color");
+                record = document.getElementById("record");
+                points = document.getElementById("points");
+                table = document.getElementById("matches");
+                rank = document.getElementById("rank");
                 loaded = true;
             }
             
             function updateComponents() {
                 var now = new Date(Date.now());
                 if (!loaded) return;
-                clock.innerHTML = formatDigitalTime(now);
+                clock.innerHTML = formatDigitalTime(now, true);
+
+                if (matches) {
+                    var currentMatch = getCurrentMatch(matches); 
+                    countdown.innerHTML = formatDifferenceTime(now, new Date(currentMatch.time*1000));
+                    red = teamsToString(currentMatch.alliances.red.teams);
+                    blue = teamsToString(currentMatch.alliances.blue.teams);
+                    if (currentMatch.alliances.red.teams.indexOf(team) > -1) {
+                        var c = "red";
+                        alliance.innerHTML = red;
+                        opposition.innerHTML = blue;
+                    } else {
+                        var c = "blue";
+                        alliance.innerHTML = blue;
+                        opposition.innerHTML = red;
+                    }
+                    color.innerHTML = c;
+                    color.style.color = c;
+                }
+
+                if (rankings) {
+                    var ranking = getRanking(rankings, team);
+                    record.innerHTML = ranking["Record (W-L-T)"];
+                    points.innerHTML = ranking["Ranking Score"];
+                    rank.innerHTML = ranking["Rank"];
+                }
             }
             
             function updateData() {
-                
+                var now = new Date(Date.now());
+                var event = null;
+
+                function updateDataWithAll(data) {
+                    matches = sorted(data.matches, "time");
+                    rankings = data.rankings;
+
+                    if (!rowsLoaded) {
+                        for (i in matches) {
+                            var match = matches[i];
+                            var row = document.createElement("tr");
+                            row.id = match.match_number;
+                            row.innerHTML = matchToRow(match);
+                            if (i > 0 && new Date(match.time*1000).getDate() != new Date(matches[i-1].time*1000).getDate()) {
+                                row.style.borderTop = "1px dashed gray";
+                            }
+                            table.appendChild(row);
+                            rowsLoaded = true;
+                        }
+                    } else {
+                        currentMatch = getCurrentMatch(matches);
+                        lastMatch = getLastMatch(matches);
+                        document.getElementById(currentMatch.match_number).innerHTML = matchToRow(currentMatch);
+                        document.getElementById(lastMatch.match_number).innerHTML = matchToRow(lastMatch);
+                    }
+                }
+
+                function updateDataWithEvents(data) {
+                    event = getCurrentEvent(data);
+                    scrapeAll({
+                        "matches": "team/" + team + "/event/" + event.key + "/matches",
+                        "rankings": "event/" + event.key + "/rankings"
+                    }, updateDataWithAll);
+                }
+
+                scrape("team/" + team + "/" + now.getFullYear() + "/events", updateDataWithEvents);
+                console.log("UPDATE");
             }
             
             function onLoad() {
                 loadComponents();
+                updateComponents();
+                updateData();
                 setInterval(updateComponents, 0.2*1000);
-                setTimeout(updateData, 60*1000);
+                setInterval(updateData, 60*1000);
             }
             
         </script>
@@ -40,23 +136,32 @@
     <body onload="javascript: onLoad();">
         <div id="content">
             <div class="columns">
-                <div class="columns">
-            <div class="column column-left">
-                <span class="left">Current time</span> <span id="clock" class="right">00:00:00</span><br>
-                <span class="left">Until next match</span> <span id="countdown" class="right">00:00</span><br>
-                <span class="left">Competition delay</span> <span id="delay" class="right">0m</span><br>
+                <div class="column column-left">
+                    <span class="left">Current time</span> <span id="clock" class="right">00:00:00</span><br>
+                    <span class="left">Until next match</span> <span id="countdown" class="right">00:00</span><br>
+                    <span class="left">Competition delay</span> <span id="delay" class="right">0m</span><br>
+                </div>
+                <div class="column column-middle">
+                    <span class="left">Next alliance</span> <span id="alliance" class="right">0, 0, 0</span><br>
+                    <span class="left">Next opposition</span> <span id="opposition" class="right">0, 0, 0</span><br>
+                    <span class="left">Next color</span> <span id="color" class="right">None</span><br>
+                </div>
+                <div class="column column-right">
+                    <span class="left">Match record</span> <span id="record" class="right">0-0-0</span><br>
+                    <span class="left">Ranking points</span> <span id="points" class="right">0</span><br>
+                    <span class="left">Competition rank</span> <span id="rank" class="right">0</span><br>
+                </div>
             </div>
-            <div class="column column-middle">
-                <span class="left">Upcoming alliance</span> <span id="alliance" class="right">0, 0, 0</span><br>
-                <span class="left">Upcoming opposition</span> <span id="opposition" class="right">0, 0, 0</span><br>
-                <span class="left">Upcoming color</span> <span id="color" class="right">None</span><br>
-            </div>
-            <div class="column column-right">
-                <span class="left">Match record</span> <span id="record" class="right">0-0-0</span><br>
-                <span class="left">Ranking points</span> <span id="points" class="right">0</span><br>
-                <span class="left">Competition rank</span> <span id="rank" class="right">0</span><br>
-            </div>
-        </div>
+            <div id="table">
+                <table id="matches">
+                    <tr>
+                        <td>#</td>
+                        <td>Time</td>
+                        <td>Red alliance</td>
+                        <td>Blue alliance</td>
+                        <td>Result</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </body>
