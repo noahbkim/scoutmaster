@@ -1,6 +1,10 @@
+body {
+	font-family: Arial;
+}
+
 #content {
-    width: 960px;
-    margin: 2em auto; 
+    width: 1000px;
+    margin: 2em auto;
 }
 
 #content .columns { 
@@ -8,10 +12,11 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+	font-size: 20px;
 }
 
 #content .column { 
-    width: 31%;
+    width: 32%;
     background-color: #DDD; 
 }
 
@@ -22,7 +27,12 @@
     line-height: 0; 
 }
 
-@media (max-width: 959px) {
+#content .right {
+	display: block;
+	float: right;
+}
+
+@media (max-width: 999px) {
     #content { width: 100%; }
     #content .columns { flex-direction: column; }
     #content .column { width: 100%; margin-top: 1em; }    

@@ -2,12 +2,43 @@
     <head>
         {% load staticfiles %}
         <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}">
+		<link rel="stylesheet" type="text/css" href="file:///Users/Noah/Repositories/scoutmaster/static/styles.css">
         <script type="text/javascript" src="{% static "api.js" %}"></script>
+		<script type="text/javascript" src="{% static "api.js" %}"></script>
         <script type="text/javascript">
-
+			
+			var loaded = false;
+			
+			function loadComponents() {
+				var clock = document.getElementById("clock");
+				var countdown = document.getElementById("countdown");
+				var alliance = document.getElementById("alliance");
+				var opposition = document.getElementById("opposition");
+				var color = document.getElementById("color");
+				var record = document.getElementById("record");
+				var points = document.getElementById("points");
+				loaded = true;
+			}
+			
+			function updateComponents() {
+				var now = new Date(Date.now());
+				if (!loaded) return;
+				clock.innerHTML = formatDigitalTime(now);
+			}
+			
+			function updateData() {
+				
+			}
+			
+			function onLoad() {
+				loadComponents();
+				setInterval(0.2*1000, updateComponents());
+				setTimeout(60*1000, updateData());
+			}
+			
         </script>
     </head>
-    <body>
+    <body onload="javascript: onLoad();">
         <div id="content">
             <div class="columns">
                 <div class="columns">

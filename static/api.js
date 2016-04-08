@@ -1,11 +1,8 @@
 function scrape(path) {
-    // Create the request
     var request = new XMLHttpRequest();
     var url = "/scout/scrape?request=" + path;
-    // Send the request
     request.open("GET", url, false);
     request.send();
-    // Process the request
     if (request.readyState == 4 && request.status == 200) {
         var data = JSON.parse(request.responseText);
         return data;
@@ -22,11 +19,8 @@ function sorted(list, key) {
 }
 
 function getCurrentEvent(team) {
-    // Now
     var now = new Date(Date.now());
-    // Get the list of events
     data = scrape("team/" + team + "/" + now.getFullYear() + "/events");
-    // Start with the first event
     var i = 0;
     var next = data[0];
     while (i < data.length) {
@@ -35,10 +29,8 @@ function getCurrentEvent(team) {
         if (now < end) next = event;
         i++;
     }
-    // If it's past the last match, return null
     var end = new Date(next.end_date.replace("-", "/").replace("-", "/"));
     if (now > end) next = null;
-    // Return
     return next;
 }
 
