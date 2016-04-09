@@ -2,6 +2,7 @@
     <head>
         {% load staticfiles %}
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Scoutmaster</title>
         <link rel="stylesheet" type="text/css" href="{% static "styles.css" %}">
         <script type="text/javascript" src="{% static "api.js" %}"></script>
         <script type="text/javascript" src="{% static "util.js" %}"></script>
@@ -10,23 +11,57 @@
             var loaded = false;
             var rowsLoaded = false;
             var team = "frc449";            
-            var clock, countdown, alliance, opposition, color, record, points, rank;
-            var matches, rankings;
+            var clock, countdown, current, alliance, opposition, color, record, points, rank;
+            var matches, rankings, teamMatches, opr;
 
             function teamsToString(teams) {
                 return teams.map(function(team) { return team.substr(3); }).join(", ");
             }
 
-            function resultToString(alliances) {
+            function predictResult(match) {
+                if (match.alliances.red.teams.indexOf(team) > -1) {
+                    var us = match.alliances.red.teams;
+                    var them = match.alliances.blue.teams;
+                } else {
+                    var us = match.alliances.blue.teams;
+                    var them = match.alliances.red.teams;
+                }
+
+                function stringSum(list) {
+                    return list.map(function i(x) { return parseInt(x); }).reduce(function s(a, b) { return a+b; });
+                }
+
+                function getScorePerMatch(t) {
+                    ranking = getRanking(rankings, t);
+                    return Math.floor(stringSum([ranking["Auto"], ranking["Scale/Challenge"], ranking["Goals"], ranking["Defense"]]) / parseInt(ranking["Played"]));
+                }
+
+                function getScoresPerMatch(a) {
+                    return Math.floor(a.map(getScorePerMatch).reduce(function s(a, b) { return a+b; }) / 3);
+                }
+
+                return getScoresPerMatch(us) + "-" + getScoresPerMatch(them);
+            }
+
+            function resultToString(match) {
+                var alliances = match.alliances;
                 var red = alliances.red;
                 var blue = alliances.blue;
-                if (red.score == -1 && blue.score == -1) return "";
+                if (red.score == -1 && blue.score == -1) return "?";
                 if (red.score > blue.score && red.teams.indexOf(team) > -1) return "W";
+                if (blue.score > red.score && blue.teams.indexOf(team) > -1) return "W";
+                if (red.score == blue.score) return "T";
                 return "L";
             }
 
+            function scoresToString(match) {
+                var alliances = match.alliances;
+                if (alliances.red.score == -1 && alliances.blue.score == -1) return "~" + predictResult(match);
+                return alliances.red.score + "-" + alliances.blue.score;
+            }
+
             function defaultRow() {
-                return "<tr><td>#</td><td>Time</td><td>Red alliance</td><td>Blue alliance</td><td>Result</td></tr>"; 
+                return "<tr><td>#</td><td>Time</td><td>Red alliance</td><td>Blue alliance</td><td>Scores</td><td>Result</td></tr>"; 
             }
 
             function matchToRow(match) {
@@ -35,20 +70,22 @@
                 out += "<td>" + formatDigitalTime(new Date(match.time * 1000)) + "</td>";
                 out += "<td>" + teamsToString(match.alliances.red.teams) + "</td>";
                 out += "<td>" + teamsToString(match.alliances.blue.teams) + "</td>";
-                out += "<td>" + resultToString(match.alliances) + "</td>";
+                out += "<td>" + scoresToString(match) + "</td>";
+                out += "<td>" + resultToString(match) + "</td>";
                 return out;
             }
 
             function loadComponents() {
                 clock = document.getElementById("clock");
                 countdown = document.getElementById("countdown");
+                current = document.getElementById("current");
                 alliance = document.getElementById("alliance");
                 opposition = document.getElementById("opposition");
                 color = document.getElementById("color");
                 record = document.getElementById("record");
                 points = document.getElementById("points");
-                table = document.getElementById("matches");
                 rank = document.getElementById("rank");
+                table = document.getElementById("matches");
                 loaded = true;
             }
             
@@ -57,9 +94,10 @@
                 if (!loaded) return;
                 clock.innerHTML = formatDigitalTime(now, true);
 
-                if (matches) {
-                    var currentMatch = getCurrentMatch(matches); 
+                if (teamMatches) {
+                    var currentMatch = getCurrentMatch(teamMatches); 
                     countdown.innerHTML = formatDifferenceTime(now, new Date(currentMatch.time*1000));
+                    current.innerHTML = getCurrentMatch(matches).match_number;
                     red = teamsToString(currentMatch.alliances.red.teams);
                     blue = teamsToString(currentMatch.alliances.blue.teams);
                     if (currentMatch.alliances.red.teams.indexOf(team) > -1) {
@@ -90,22 +128,28 @@
                 function updateDataWithAll(data) {
                     matches = sorted(data.matches, "time");
                     rankings = data.rankings;
+                    teamMatches = [];
+                    for (i in matches) {
+                        if (matches[i].alliances.red.teams.indexOf(team) > -1 || matches[i].alliances.blue.teams.indexOf(team) > -1) {
+                            teamMatches.push(matches[i]);
+                        }
+                    }
 
                     if (!rowsLoaded) {
-                        for (i in matches) {
-                            var match = matches[i];
+                        for (i in teamMatches) {
+                            var match = teamMatches[i];
                             var row = document.createElement("tr");
                             row.id = match.match_number;
                             row.innerHTML = matchToRow(match);
-                            if (i > 0 && new Date(match.time*1000).getDate() != new Date(matches[i-1].time*1000).getDate()) {
-                                row.style.borderTop = "1px dashed gray";
+                            if (i > 0 && new Date(match.time*1000).getDate() != new Date(teamMatches[i-1].time*1000).getDate()) {
+                                row.style.borderTop = "1px dotted gray";
                             }
                             table.appendChild(row);
                             rowsLoaded = true;
                         }
                     } else {
-                        currentMatch = getCurrentMatch(matches);
-                        lastMatch = getLastMatch(matches);
+                        currentMatch = getCurrentMatch(teamMatches);
+                        lastMatch = getLastMatch(teamMatches);
                         document.getElementById(currentMatch.match_number).innerHTML = matchToRow(currentMatch);
                         document.getElementById(lastMatch.match_number).innerHTML = matchToRow(lastMatch);
                     }
@@ -114,7 +158,7 @@
                 function updateDataWithEvents(data) {
                     event = getCurrentEvent(data);
                     scrapeAll({
-                        "matches": "team/" + team + "/event/" + event.key + "/matches",
+                        "matches": "event/" + event.key + "/matches",
                         "rankings": "event/" + event.key + "/rankings"
                     }, updateDataWithAll);
                 }
@@ -139,12 +183,12 @@
                 <div class="column column-left">
                     <span class="left">Current time</span> <span id="clock" class="right">00:00:00</span><br>
                     <span class="left">Until next match</span> <span id="countdown" class="right">00:00</span><br>
-                    <span class="left">Competition delay</span> <span id="delay" class="right">0m</span><br>
+                    <span class="left">Current match</span> <span id="current" class="right">0m</span><br>
                 </div>
                 <div class="column column-middle">
-                    <span class="left">Next alliance</span> <span id="alliance" class="right">0, 0, 0</span><br>
-                    <span class="left">Next opposition</span> <span id="opposition" class="right">0, 0, 0</span><br>
-                    <span class="left">Next color</span> <span id="color" class="right">None</span><br>
+                    <span class="left">Alliance</span> <span id="alliance" class="right">0, 0, 0</span><br>
+                    <span class="left">Opposition</span> <span id="opposition" class="right">0, 0, 0</span><br>
+                    <span class="left">Color</span> <span id="color" class="right">None</span><br>
                 </div>
                 <div class="column column-right">
                     <span class="left">Match record</span> <span id="record" class="right">0-0-0</span><br>
@@ -159,6 +203,7 @@
                         <td>Time</td>
                         <td>Red alliance</td>
                         <td>Blue alliance</td>
+                        <td>Scores</td>
                         <td>Result</td>
                     </tr>
                 </table>

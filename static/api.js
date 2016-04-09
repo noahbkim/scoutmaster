@@ -1,6 +1,6 @@
 function scrape(path, callback) {
     var request = new XMLHttpRequest();
-    var url = "/scout/scrape?request=" + path;
+    var url = "/scout/scrape/" + path;
     request.open("GET", url, true);
     request.onreadystatechange = function() {
         if (request.readyState == 4 && request.status == 200) {
@@ -18,7 +18,7 @@ function scrapeAll(paths, callback) {
         var request = new XMLHttpRequest();
         request.name = Object.keys(paths)[i];
         request.path = paths[request.name];
-        var url = "/scout/scrape?request=" + request.path;
+        var url = "/scout/scrape/" + request.path;
         request.open("GET", url, true);
         request.onreadystatechange = function() {
             if (this.readyState == 4) {
@@ -27,6 +27,7 @@ function scrapeAll(paths, callback) {
                         responses[this.name] = JSON.parse(this.responseText);
                     } catch(error) {}
                 } else {
+                    console.log(this.status);
                     responses[this.name] = null;
                 }
                 for (i in Object.keys(paths)) {
@@ -55,10 +56,12 @@ function getCurrentEvent(events) {
     while (i < events.length) {
         var event = events[i];
         var end = new Date(event.end_date.replace("-", "/").replace("-", "/"));
+        end.setDate(end.getDate()+1);
         if (now < end) next = event;
         i++;
     }
     var end = new Date(next.end_date.replace("-", "/").replace("-", "/"));
+    end.setDate(end.getDate()+1);
     if (now > end) next = null;
     return next;
 }
@@ -105,4 +108,3 @@ function getRanking(rankings, team) {
     for (var i in rankings[0]) map[rankings[0][i]] = result[i];
     return map;
 }
-

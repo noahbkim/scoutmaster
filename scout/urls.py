@@ -18,11 +18,14 @@ from django.contrib import admin
 from django.views import static
 
 import index.views
+import scrape.views
 
 urlpatterns = [
     url(r"^$", index.views.index),
     url(r"^admin/", admin.site.urls),
     url(r"^dashboard/", include("dashboard.urls")),
     url(r"^scrape/", include("scrape.urls")),
+    url(r"^scrape/(?P<path>.+)$", scrape.views.scrape),
+    url(r"^info/", include("info.urls")),
     url(r"^static/(?P<path>.*)$", static.serve, {"document_root": "/var/www/scout/static"})
 ]
